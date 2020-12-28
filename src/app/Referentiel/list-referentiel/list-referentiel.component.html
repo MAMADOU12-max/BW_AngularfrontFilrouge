@@ -1,0 +1,22 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+
+<div class="container offset-lg-3 offset-md-3 offset-sm-1 offset-0">
+
+  <div class="d-flex justify-content-between col-12 d-inline-block">
+      <h1 class="text-center p-2 font-weight-bold">Liste des référentiels</h1>
+      <a  class="text-right p-2 font-weight-bold" routerLink="/addReferentiel"><i class="fa fa-user-plus fa-3x"></i></a>
+  </div>
+
+  <div class="col-lg-12">
+      <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6 col-12  mt-4 mb-4" style="box-shadow: 2px 1px 2px gray;" *ngFor="let referentiel of referentiels">
+               <app-item-referentiel></app-item-referentiel>
+          </div>
+      </div>
+  </div>
+
+</div>
+
+
+

@@ -1,0 +1,23 @@
+.adding {
+  background: none;
+  color: #ccc;
+  /*width: 240px;*/
+  /*height: 80px;*/
+  border: 2px solid #338033;
+  font-size: 28px;
+  font-family: "montserrat", sans-serif;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  min-width: 200px;
+  margin: 10px;
+  cursor: pointer;
+  /*transition: color 6.1s linear;*/
+  border-radius: 34px;
+  /*border-radius: 4px;*/
+  /*transition: .6s;*/
+  /*overflow: hidden;*/
+}
+.adding:hover {
+  color: #0B87A6;
+  background-color: #0B87A6;
+}

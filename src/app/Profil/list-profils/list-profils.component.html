@@ -1,0 +1,49 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+
+<div class="container">
+
+  <div class="d-flex justify-content-between col-12 d-inline-block">
+    <h1 class="text-center p-2 font-weight-bold">Listes Profil</h1>
+    <a  class="text-right p-2 font-weight-bold" routerLink="/addProfil"><i class="fa fa-user-plus fa-3x"></i></a>
+  </div>
+
+  <div class="col-lg-12">
+    <table class="table table-hover" style="box-shadow: 10px 5px 5px gray; background-color: white">
+        <thead class="bg-dark">
+            <tr>
+                <th scope="col" class="text-white">Libelle</th>
+                <th scope="col" class="text-white text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+<!--  item  -->
+<!--        <tr>-->
+<!--            <td  class="align-items-center text-center">-->
+<!--                <app-item-profil></app-item-profil>-->
+<!--            </td>-->
+<!--            <td class="text-center">-->
+<!--              <button class="btn btn-primary  badge-pill" style="width: 80px;width: 130px;" routerLink="/admin/detail">Liste apprenant</button>-->
+<!--              <button class="btn btn-dark ml-4 badge-pill" style="width: 80px;width: 130px;" routerLink="/admin/edit">Edit</button>-->
+<!--              <button class="btn btn-danger ml-4 badge-pill" style="width: 80px;width: 130px;">Delete</button>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        end item  -->
+
+        <tr *ngFor="let profil of profils">
+            <td class="align-items-center text-center">{{profil}}</td>
+            <td class="text-center">
+                <button class="btn btn-primary  badge-pill" style="width: 80px;width: 130px;" routerLink="/admin/detail">Liste apprenant</button>
+                <button class="btn btn-dark ml-4 badge-pill" style="width: 80px;width: 130px;" routerLink="/admin/edit">Edit</button>
+                <button class="btn btn-danger ml-4 badge-pill" style="width: 80px;width: 130px;">Delete</button>
+            </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="middle col-12">
+    <button class="adding text-dark" routerLink="/addProfil">Add Profil</button>
+    <br><br><br>
+  </div>
+</div>

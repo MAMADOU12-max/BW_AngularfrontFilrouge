@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UserService} from '../../../Services/user.service';
+import {UserModal} from '../../../Modal/UserModal';
 
 @Component({
   selector: 'app-add-users',
@@ -7,9 +10,54 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddUsersComponent implements OnInit {
 
-  constructor() { }
+  formUser: FormGroup | any;
+  selectedFile: any ;
+  user: UserModal | any;
+  firstname: string | undefined;
+  lastname: string | undefined;
+  email: string | undefined;
+  password: string | undefined;
+  photo: string | undefined;
+  username: string | undefined;
+  constructor(private formBuilder: FormBuilder, private userService: UserService) { }
 
   ngOnInit(): void {
+    this.formUser = this.formBuilder.group({
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      username: ['', [Validators.required]],
+      photo: ['', [Validators.required]]
+    }) ;
+  }
+
+  Uploadefiler(event: { target: { files: any[]; }; }): any {
+    this.selectedFile = event.target.files[0] ;
+    console.log(this.selectedFile) ;
+  }
+
+  // tslint:disable-next-line:typedef
+  addUser() {
+    console.log('cool ici') ;
+
+      const formValue = this.formUser.value ;
+    console.log(formValue) ;
+      const formData = new FormData();
+
+      for (const key of Object.keys(formValue)) {
+          if (key !== 'photo') {
+            const value =  formValue[key] ;
+            formData.append(key, value) ;
+          }
+      }
+
+      formData.append('photo',  this.selectedFile) ;
+
+      this.userService.postUseronBack(formValue).subscribe( data => {
+          console.log('cool') ;
+      }) ;
+
   }
 
 }

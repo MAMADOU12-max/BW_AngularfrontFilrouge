@@ -11,7 +11,6 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DetailUserComponent } from './User/detail-user/detail-user.component';
 import { ListProfilsComponent } from './Profil/list-profils/list-profils.component';
-import { AddProfilComponent } from './Profil/add-profil/add-profil.component';
 import { EditProfilComponent } from './Profil/edit-profil/edit-profil.component';
 import { DetailProfilComponent } from './Profil/detail-profil/detail-profil.component';
 import { ListProfilDeSortieComponent } from './Profil_de_sortie/list-profil-de-sortie/list-profil-de-sortie.component';
@@ -35,6 +34,11 @@ import { ItemProfildesortieComponent } from './Profil_de_sortie/list-profil-de-s
 import { ItemProfilComponent } from './Profil/list-profils/item-profil/item-profil.component';
 import { ItemGrpecompetenceComponent } from './Groupe_de_Competence/list-grpe-competence/item-grpecompetence/item-grpecompetence.component';
 import { ItemCompetenceComponent } from './Competence/list-competence/item-competence/item-competence.component';
+import { ErrorComponent } from './error/error.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { InterceptorInterceptor } from 'src/InterCepteur/interceptor.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +51,6 @@ import { ItemCompetenceComponent } from './Competence/list-competence/item-compe
     SidebarComponent,
     DetailUserComponent,
     ListProfilsComponent,
-    AddProfilComponent,
     EditProfilComponent,
     DetailProfilComponent,
     ListProfilDeSortieComponent,
@@ -71,12 +74,23 @@ import { ItemCompetenceComponent } from './Competence/list-competence/item-compe
     ItemProfilComponent,
     ItemGrpecompetenceComponent,
     ItemCompetenceComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorInterceptor,
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

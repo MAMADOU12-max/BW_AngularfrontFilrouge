@@ -1,1 +1,17 @@
-<p>edit-profil works!</p>
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+
+<div class="adduser">
+  <div class="container signup-form offset-lg-3 offset-sm-1 offset-md-0 offset-0">
+
+    <h1>Edit Profil</h1>
+    <form #profilchange="ngForm" (ngSubmit)="editingProfil(profilchange)">
+        <div class="form-group">
+            <label for="inputAddress">Libelle</label>
+            <input type="text" class="form-control" ngModel name="libelle" id="inputAddress" placeholder="libelle" value="{{editprofil.libelle}}">
+        </div>
+        <button type="submit" class="mt-3 font-weight-bold rounded h4 btn-outline-dark"
+                 style="margin-bottom: 12px">Update Profil</button>
+    </form>
+  </div>
+</div>

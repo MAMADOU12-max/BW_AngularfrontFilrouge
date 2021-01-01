@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../Services/auth.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-login',
@@ -7,29 +11,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  username: string = '';
+  password: string ='';
+  loginForm: FormGroup | any;
+  fakeAuth = false;
+  submitted = false;
+
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
+      this.loginForm = this.formBuilder.group({
+          username: ['',[Validators.required]] ,
+          password: ['',[Validators.required]]
+      }) ;
   }
 
-//    const inputs = document.querySelectorAll(".input");
-//
-//
-// function addcl(){
-//      let parent = this.parentNode.parentNode;
-//      parent.classList.add("focus");
-// }
-//
-//    function remcl(){
-//      let parent = this.parentNode.parentNode;
-//   if(this.value == ""){
-//      parent.classList.remove("focus");
-//     }
-//   }
-//
-//
-//     this.inputs.forEach(input => {
-//        // input.addEventListener("focus", addcl);
-//        // input.addEventListener("blur", remcl);
-//    });
+  get f() {
+    return this.loginForm.controls ;
+  }
+
+  onLogin() {
+      this.submitted = true ;
+      if (this.loginForm.invalid) {
+         return ;
+      }
+      this.authService.Authentification(this.username, this.password).subscribe(data =>{
+        this.router.navigate(['/listProfil']) ;
+      } , error => {
+          console.log(error)
+           this.fakeAuth = true ;
+           return ;
+      })
+  }
 }

@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class AddPromotionComponent implements OnInit {
 
   constructor() { }
+  //
+  // refcolor: 'red';
 
   ngOnInit(): void {
   }

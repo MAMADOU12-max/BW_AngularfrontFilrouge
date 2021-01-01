@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ProfilService} from "../../../Services/profil.service";
 
 @Component({
   selector: 'app-list-profil-de-sortie',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListProfilDeSortieComponent implements OnInit {
 
-  constructor() { }
+  constructor(private profilService:ProfilService) { }
 
   ngOnInit(): void {
+
   }
 
 }

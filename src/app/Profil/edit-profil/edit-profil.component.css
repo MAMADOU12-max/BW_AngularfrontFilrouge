@@ -1,0 +1,23 @@
+
+
+.adduser{
+  margin: 0;
+  padding: 0;
+  -moz-background-size: cover;
+  height: 900px;
+  margin-top: -120px;
+  padding-top: 134px;
+}
+.signup-form{
+  text-align: center;
+  background-image: linear-gradient(to right, #868f96 0%, #596164 100%);
+  top: 70%;
+  border-radius: 32px;
+  box-shadow: 10px 5px 5px ;
+}
+.signup-form h1{
+  margin-top: 10px;
+  font-family: 'Permanent Marker', cursive;
+  color: #fff;
+  font-size: 40px;
+}

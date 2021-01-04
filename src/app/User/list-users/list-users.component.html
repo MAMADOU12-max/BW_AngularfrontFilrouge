@@ -1,10 +1,10 @@
 <app-header></app-header>
 <app-sidebar></app-sidebar>
 
-<div class="container offset-lg-3 offset-md-3 offset-sm-0 offset-0 pl-0 pl-5">
+<div class="container offset-lg-2 offset-md-3 offset-sm-0 offset-0 pl-0 pl-5">
 
   <div class="d-flex justify-content-between col-12 d-inline-block">
-    <h1 class="text-center p-2 font-weight-bold">Listes Users</h1>
+    <h2 class="text-center p-2 font-weight-bold">Listes Users</h2>
     <a  class="text-right p-2 font-weight-bold" routerLink="/addUser"><i class="fa fa-user-plus fa-3x"></i></a>
   </div>
 
@@ -14,31 +14,37 @@
       <thead class="bg-dark">
       <tr>
         <th scope="col" class="text-white">Avatar</th>
-        <th scope="col" class="text-white">Firstname</th>
-        <th scope="col" class="text-white">Lastname</th>
+        <th scope="col" class="text-white">Username</th>
+<!--        <th scope="col" class="text-white">Lastname</th>-->
         <th scope="col" class="text-white">Email</th>
         <th scope="col" class="text-white">Profil</th>
         <th scope="col" class="text-white text-center">Actions</th>
       </tr>
       </thead>
       <tbody >
-        <tr *ngFor="let user of users">
+        <tr *ngFor="let user of users | paginate: { id: 'foo',
+                                                      itemsPerPage: 5,
+                                                      currentPage: page,
+                                                      totalItems: totalUsers }">
           <td scope="row"><img src="data:image/jpg;base64,{{user.photo}}" class="img-thumbnail" alt="" style="height: 60px;width: 60px"></td>
-          <td  class="align-content-center">{{user.firtname}}</td>
-          <td class="align-content-center">{{user.lastname}}</td>
+          <td  class="align-content-center">{{user.username}}</td>
+<!--          <td class="align-content-center">{{user.lastname}}</td>-->
           <td >{{user.email}}</td>
           <td>{{user.roles}}</td>
           <td class="float-right ">
-            <button class="btn btn-primary  badge-pill" style="width: 80px;" routerLink="/admin/detailUser">Details</button>
+            <button class="btn btn-primary  badge-pill" style="width: 80px;" routerLink="/listUsers/{{user.id}}/detail">Details</button>
             <button class="btn btn-dark  badge-pill" style="width: 80px;" routerLink="/editUser/{{user.id}}">Edit</button>
             <button class="btn btn-danger  badge-pill" style="width: 80px;">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        <pagination-controls id="foo" maxSize="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>
+    </div>
   </div>
-  <div class="middle col-12">
-    <button class="adding text-dark" routerLink="/addUser">Add User</button>
-    <br><br><br>
-  </div>
+<!--  <div class="middle col-12">-->
+<!--    <button class="adding text-dark" routerLink="/addUser">Add User</button>-->
+<!--    <br><br><br>-->
+<!--  </div>-->
 </div>

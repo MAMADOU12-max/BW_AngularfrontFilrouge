@@ -1,52 +1,64 @@
 <app-header></app-header>
 <app-sidebar></app-sidebar>
 
-<div class="container">
+<div class="container offset-lg-3">
 
-  <div class="d-flex justify-content-between col-12 d-inline-block">
-    <h1 class="text-center p-2 font-weight-bold">Listes des Profils de sortie</h1>
-    <a  class="text-right p-2 font-weight-bold" routerLink="/addprofildeSortie"><i class="fa fa-user-plus fa-3x"></i></a>
+  <div class="row">
+      <div class="d-flex justify-content-between col-10 d-inline-block">
+          <h3 class="text-center p-2 font-weight-bold">Listes des Profils de sortie</h3>
+          <div class="d-flex">
+            <form action="" class="d-flex" #addProfSortie="ngForm" >
+                <input type="text" placeholder="nouveau profil de sortie" ngModel name="libelle" class="form-control mt-1" required="">
+                <button class="btn btn-dark mt-1" style="height: 39px" (click)="AddProfSortie(addProfSortie)">Add</button>
+            </form>
+<!--            <a  class="text-right p-2 font-weight-bold" routerLink="/addprofildeSortie"><i class="fa fa-user-plus fa-2x"></i></a>-->
+          </div>
+      </div>
   </div>
 
-  <div class="col-lg-12">
-    <table class="table table-hover" style="box-shadow: 10px 5px 5px gray; background-color: white">
-      <thead class="bg-dark">
-      <tr>
-        <th scope="col" class="text-white text-center">Libelle</th>
-        <th scope="col" class="text-white text-center">Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td class="align-items-center text-center">Développeur front</td>
-        <td class="text-center">
-          <button class="btn btn-dark ml-4 badge-pill" style="width: 80px;width: 130px;" routerLink="/admin/edit">Edit</button>
-          <button class="btn btn-danger ml-4 badge-pill" style="width: 80px;width: 130px;">Delete</button>
-        </td>
-      </tr>
-      <tr>
-        <td class="align-items-center text-center">Développeur back</td>
-        <td class="text-center">
-          <button class="btn btn-dark ml-4 badge-pill" style="width: 80px;width: 130px;" routerLink="/admin/edit">Edit</button>
-          <button class="btn btn-danger ml-4 badge-pill" style="width: 80px;width: 130px;">Delete</button>
-        </td>
-      </tr>
-      <tr>
-        <td class="align-items-center text-center">Développeur fullstack</td>
-        <td class="text-center">
-          <button class="btn btn-dark  badge-pill ml-4" style="width: 130px;" routerLink="/admin/edit">Edit</button>
-          <button class="btn btn-danger  badge-pill ml-4" style="width: 130px;">Delete</button>
-        </td>
-      </tr>
-      <tr>
-        <td class="align-items-center text-center">Intégrateur Web</td>
-        <td class="text-center">
-          <button class="btn btn-dark  badge-pill ml-4" style="width: 130px;" routerLink="/admin/edit">Edit</button>
-          <button class="btn btn-danger  badge-pill ml-4" style="width: 130px;">Delete</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+  <div class="row">
+
+      <div class="col-lg-10">
+        <table class="table table-hover" style="box-shadow: 10px 5px 5px gray; background-color: white">
+          <thead class="bg-dark">
+          <tr>
+            <th scope="col" class="text-white text-center">Libelle</th>
+            <th scope="col" class="text-white text-center">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let ps of profilSorties | paginate: { id: 'profilsortie',
+                                                      itemsPerPage: 5,
+                                                      currentPage: page,
+                                                      totalItems: totalProfilsSortie }">
+            <td class="align-items-center text-center">
+                <div *ngIf="!ps.isEdit">
+                    {{ps.libelle}}
+                </div>
+                <div *ngIf="ps.isEdit">
+                  <input type="text" class="form-control" [(ngModel)]="ps.libelle">
+                </div>
+            </td>
+            <td class="text-center">
+                <div *ngIf="!ps.isEdit">
+                    <button class="btn btn-dark ml-4 badge-pill" (click)="wantEdit(ps)" style="width: 80px;width: 130px;">Edit</button>
+                    <button class="btn btn-danger ml-4 badge-pill" (click)="deleteProfilSortie(ps.id)" style="width: 80px;width: 130px;">Delete</button>
+                </div>
+                <div *ngIf="ps.isEdit">
+                  <i class="fa fa-check-circle fa-3x text-primary mr-5" (click)="EditProfilSortie(ps)"></i>
+                  <i class="fa fa-ban fa-3x text-danger ml-4" (click)="close(ps)"></i>
+<!--                    <button class="btn btn-dark ml-4 badge-pill" (click)="editPsById(ps)" style="width: 80px;width: 130px;">Edit</button>-->
+<!--                    <button class="btn btn-danger ml-4 badge-pill" (click)="deleteProfilSortie(ps.id)" style="width: 80px;width: 130px;">Delete</button>-->
+                </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+          <pagination-controls id="profilsortie" maxSize="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>
+        </div>
+      </div>
+
   </div>
   <!--  <div class="middle col-12">-->
   <!--    <button class="adding text-dark" routerLink="/addProfil">Add Profil</button>-->

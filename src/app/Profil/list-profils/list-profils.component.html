@@ -4,23 +4,21 @@
 <div class="container">
 
     <div class="d-flex justify-content-between col-md-6 offset-1 d-inline-block">
-        <h1 class="text-center p-2 font-weight-bold">Listes Profil</h1>
+<!--        <h2 class="text-center p-2 font-weight-bold">Liste Profils</h2>-->
 <!--        <a  class="text-right p-2 font-weight-bold" routerLink="/listProfil/add"><i class="fa fa-user-plus fa-3x"></i></a>-->
-
     </div>
 
     <div class="row">
-
         <div class="col-lg-6 col-md-12 col-sm-12 col-12 offset-lg-1 offset-0">
-              <div class="col-lg-12 mt-2 mb-2">
-                  <form action="" class="form-groupe" [formGroup]="formGroup" (ngSubmit)="addingProfil()">
-                        <div class="d-flex flex-row" style="box-shadow: 10px 5px 5px gray;">
-                            <input type="text" class="form-control" [(ngModel)]="libelle"
-                                   formControlName="libelle" placeholder="enter a new profil" style="width: 85%">
-                            <button class="btn btn-primary">Add</button>
-                        </div>
-                  </form>
-              </div>
+            <div class="col-lg-12 mt-2 mb-2 rounded-3">
+                <form action="" class="form-groupe" [formGroup]="formGroup" (ngSubmit)="addingProfil()">
+                    <div class="d-flex flex-row" style="box-shadow: 10px 5px 5px gray;">
+                        <input type="text" class="form-control" [(ngModel)]="libelle"
+                               formControlName="libelle" placeholder="enter a new profil" style="width: 95%">
+                        <button class="btn btn-dark">Add Profil</button>
+                    </div>
+                </form>
+            </div>
             <table class="table table-hover" style="box-shadow: 10px 5px 5px gray; background-color: white">
                   <thead class="bg-dark">
                       <tr>
@@ -30,10 +28,13 @@
                   </thead>
                   <tbody>
 
-                  <tr *ngFor="let profil of profils">
+                  <tr *ngFor="let profil of profils | paginate: { id: 'profil',
+                                                      itemsPerPage: 5,
+                                                      currentPage: page,
+                                                      totalItems: totalProfils }">
                       <td class="align-items-center text-center">{{profil.libelle}}</td>
                       <td class="text-center">
-                          <button class="btn btn-primary  badge-pill mb-3" style="" routerLink="/admin/detail">Liste apprenant</button> &nbsp;
+                          <button class="btn btn-primary  badge-pill mb-3" style="" routerLink="/listProfil/{{profil.libelle}}/{{profil.id}}">List</button> &nbsp;
                           <span>
                               <a routerLink="/listProfil/{{profil.id}}/edit"><i class="fa fa-edit fa-2x text-info"></i></a> &nbsp;
                               <a routerLink="/listProfil" (click)="deletingprofil(profil.id)" ><i class="fa fa-trash fa-2x text-danger" ></i></a>
@@ -44,6 +45,9 @@
 
                 </tbody>
               </table>
+            <div class="d-flex justify-content-center">
+              <pagination-controls id="profil" maxSize="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>
+            </div>
         </div>
         <div class="col-lg-5 col-md-12 col-sm-12 col-12 mt-md-5 ">
             <router-outlet></router-outlet>

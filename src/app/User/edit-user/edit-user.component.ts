@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {UserService} from '../../../Services/user.service';
+import {UserModal} from '../../../Modal/UserModal';
 
 @Component({
   selector: 'app-edit-user',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditUserComponent implements OnInit {
 
-  constructor() { }
+  userUpdated: UserModal | any ;
+  constructor(private activated: ActivatedRoute, private userService: UserService) { }
 
   ngOnInit(): void {
+     const idUserUpdated = +this.activated.snapshot.params.id ;
+     console.log(idUserUpdated) ;
+     this.userService.getUserByIdfromdb(idUserUpdated).subscribe( data => {
+          this.userUpdated = data ;
+     });
   }
 
 }

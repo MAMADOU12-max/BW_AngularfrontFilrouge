@@ -16,11 +16,11 @@
                 </span>
             </div>
             <img src="assets/img/avatar.svg">
-            <h2 class="title">Welcome</h2>
+            <h3 class="title">Welcome</h3>
             <div class="alert alert-danger" *ngIf="fakeAuth">
                 <strong>Alert!</strong> Your data given is not matched, please verify again!
             </div>
-            <div class="input-div one">
+            <div class="input-div one " style="margin-left: 45px;margin-right: 45px">
                 <div class="i">
                     <i class="fa fa-user fa-2x text-dark"></i>
                 </div>
@@ -31,7 +31,7 @@
             <span class="text-danger" *ngIf="submitted && f.username.errors">
                   <span *ngIf="f.username.errors.required">Username must be provided</span>
             </span>
-            <div class="input-div pass">
+            <div class="input-div pass" style="margin-left: 45px;margin-right: 45px">
                   <div class="i">
                         <i class="fa fa-lock fa-2x text-dark"></i>
                   </div>

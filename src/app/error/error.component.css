@@ -1,7 +1,13 @@
-.coli {
-  background-image: url("../../assets/img/error.png");
-  width: 1520px;
-  height: 53em;
 
-  background-size: cover;
+body {
+  background-color: white;
+  /*margin-left: 53px;*/
+  padding-left: 132px;
+  margin-top: 11em;
+  background-image: url("../../assets/img/cap.png");
+width: 1320px;
+  height: 26em;
 }
+.error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }

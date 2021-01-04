@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../../Services/auth.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import {AuthService} from '../../Services/auth.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -11,8 +11,8 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  username: string = '';
-  password: string ='';
+  username = '';
+  password = '';
   loginForm: FormGroup | any;
   fakeAuth = false;
   submitted = false;
@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
       this.loginForm = this.formBuilder.group({
-          username: ['',[Validators.required]] ,
-          password: ['',[Validators.required]]
+          username: ['', [Validators.required]] ,
+          password: ['', [Validators.required]]
       }) ;
   }
 
@@ -35,12 +35,13 @@ export class LoginComponent implements OnInit {
       if (this.loginForm.invalid) {
          return ;
       }
-      this.authService.Authentification(this.username, this.password).subscribe(data =>{
+      this.authService.Authentification(this.username, this.password).subscribe(data => {
         this.router.navigate(['/listProfil']) ;
+        this.username = '';
       } , error => {
-          console.log(error)
-           this.fakeAuth = true ;
-           return ;
-      })
+          console.log(error);
+          this.fakeAuth = true ;
+          return ;
+      });
   }
 }

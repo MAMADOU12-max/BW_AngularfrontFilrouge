@@ -9,12 +9,17 @@ import {UserService} from '../../../Services/user.service';
 export class ListUsersComponent implements OnInit {
 
   users: any = [] ;
+  page: number | any = 1;
+  totalUsers: number | any;
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.userService.getAllUserfromdb().subscribe(data => {
       this.users = data ;
-      console.log(this.users) ;
+      // this.users = data.results;
+      this.totalUsers = this.users.length ;
+
+      // console.log(this.totalUsers) ;
     });
   }
 

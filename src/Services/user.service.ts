@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../environments/environment';
 import {Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {UserModal} from "../Modal/UserModal";
+import {UserModal} from '../Modal/UserModal';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,14 @@ export class UserService {
       return this.httpClient.get(this.urlEnv + '/admin/users?Archivage=0');
   }
 
-  postUseronBack(user: UserModal) {
-    return this.httpClient.post(this.urlEnv + '/admin/users');
+  // tslint:disable-next-line:typedef
+  postUseronBack(user: FormData) {
+    // @ts-ignore
+    return this.httpClient.post(this.urlEnv + '/admin/users', {user});
+  }
+
+  // tslint:disable-next-line:typedef
+  getUserByIdfromdb(id: number) {
+      return this.httpClient.get(this.urlEnv + '/admin/users/' + id);
   }
 }

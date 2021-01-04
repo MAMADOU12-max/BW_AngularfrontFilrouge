@@ -10,6 +10,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class ListProfilsComponent implements OnInit {
 
+
+  page: number | any = 1;
+  totalProfils: number | any;
   profils: any = [];
   libelle = '';
   formGroup: FormGroup | any;
@@ -54,7 +57,8 @@ export class ListProfilsComponent implements OnInit {
   public getAllProfil() {
     this.profilService.getallprofil().subscribe(data => {
       this.profils = data ;
-      // console.log(this.profils) ;
+      this.totalProfils = this.profils.length ;
+
     });
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ProfilService} from "../../../Services/profil.service";
+import {ProfilDeSortieService} from '../../../Services/profil-de-sortie.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-list-profil-de-sortie',
@@ -8,10 +9,65 @@ import {ProfilService} from "../../../Services/profil.service";
 })
 export class ListProfilDeSortieComponent implements OnInit {
 
-  constructor(private profilService:ProfilService) { }
+  page: number | any = 1;
+  totalProfilsSortie: number | any;
+  libelle = '';
+  isEdit: boolean | undefined;
+  profilSorties: any = [] ;
+  constructor(private profildeSortieService: ProfilDeSortieService) { }
 
   ngOnInit(): void {
-
+      this.profildeSortieService.refresNeeded$.subscribe( () => {
+        this.getAllprofildesortie();
+      });
+      this.getAllprofildesortie();
   }
 
+  // tslint:disable-next-line:typedef
+  public getAllprofildesortie() {
+    this.profildeSortieService.getAllprofilDeSortiefromdb().subscribe(data => {
+      this.profilSorties = data ;
+      this.totalProfilsSortie = this.profilSorties.length;
+      // tslint:disable-next-line:no-shadowed-variable
+      this.profilSorties.forEach( (element: { isEdit: boolean; }) => {
+          element.isEdit = false;
+      });
+      // console.log(this.profilSorties) ;
+    });
+  }
+  // tslint:disable-next-line:typedef
+  deleteProfilSortie(id: number) {
+        console.log(id) ;
+        if (confirm('Are you sure that you want do this action')) {
+         this.profildeSortieService.deleteprofildeSortieondb(id).subscribe( data => {
+           alert('this profil deleted with success');
+         });
+     }
+  }
+
+  // tslint:disable-next-line:typedef
+  AddProfSortie(libelleps: NgForm) {
+    // console.log(libelleps.value) ;
+    this.profildeSortieService.postprofildeSortieondb(libelleps.value).subscribe(libelle => {
+        alert('profil added');
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  wantEdit(data: any) {
+      data.isEdit = true ;
+  }
+  // tslint:disable-next-line:typedef
+  close(data: any) {
+     data.isEdit = false ;
+  }
+
+  // tslint:disable-next-line:typedef
+  EditProfilSortie(data: any) {
+    // console.log(data.libelle) ;
+    // console.log(data.id);
+    this.profildeSortieService.putProfildeSortieonDb(data.id, data.libelle).subscribe(() => {
+            alert('Profil updated');
+    });
+  }
 }

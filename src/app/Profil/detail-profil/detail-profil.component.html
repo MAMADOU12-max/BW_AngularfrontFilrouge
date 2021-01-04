@@ -1,1 +1,24 @@
-<p>detail-profil works!</p>
+
+<table class="table table-hover" style="box-shadow: 10px 5px 5px gray; background-color: white">
+    <thead class="bg-dark">
+        <tr>
+            <th scope="col" class="text-white">Id</th>
+            <th></th>
+            <th scope="col" class="text-white text-center">Username</th>
+            <th scope="col" class="text-white text-center">Avatar</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let user of profils.users" >
+        <td class="text-center justify-content-center font-weight-bold d-flex align-self-center m-4">{{user?.id}}</td>
+      <td></td>
+        <td class="text-center justify-content-center font-weight-bold d-flex align-self-center m-4" style="padding-top: 12px"><h5>{{user?.username}}</h5></td>
+        <td class="text-center rounded">
+              <img class="rounded-circle" style="height: 60px;width: 60px"
+                                         src="data:image/jpg;base64,{{user?.photo}}"/>
+        </td>
+    </tr>
+
+    </tbody>
+</table>

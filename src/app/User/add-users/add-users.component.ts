@@ -19,6 +19,9 @@ export class AddUsersComponent implements OnInit {
   password: string | undefined;
   photo: string | undefined;
   username: string | undefined;
+  profils: string | any ;
+  formData: any ;
+
   constructor(private formBuilder: FormBuilder, private userService: UserService) { }
 
   ngOnInit(): void {
@@ -28,36 +31,38 @@ export class AddUsersComponent implements OnInit {
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
       username: ['', [Validators.required]],
-      photo: ['', [Validators.required]]
+      photo: ['', [Validators.required]],
+      profils: ['', [Validators.required]]
     }) ;
   }
 
-  Uploadefiler(event: { target: { files: any[]; }; }): any {
+  Uploadefiler(event: any): any {
     this.selectedFile = event.target.files[0] ;
-    console.log(this.selectedFile) ;
+    // console.log(this.selectedFile) ;
   }
 
   // tslint:disable-next-line:typedef
   addUser() {
-    console.log('cool ici') ;
+    const formValue = this.formUser.value ;
+    this.formData = new FormData();
 
-      const formValue = this.formUser.value ;
-    console.log(formValue) ;
-      const formData = new FormData();
+    for (const key of Object.keys(formValue)) {
+      if (key !== 'photo') {
+          const value =  formValue[key] ;
+          // console.log(value);
+          this.formData.append(key, value) ;
+        }
+        // console.log(formData) ;
+    }
+    // const cool = 'test' ;
+    this.formData.append('photo',  this.selectedFile) ;
+    // this.formData.append('photo',  cool) ;
 
-      for (const key of Object.keys(formValue)) {
-          if (key !== 'photo') {
-            const value =  formValue[key] ;
-            formData.append(key, value) ;
-          }
-      }
-
-      formData.append('photo',  this.selectedFile) ;
-
-      this.userService.postUseronBack(formValue).subscribe( data => {
-          console.log('cool') ;
-      }) ;
-
+    // return formData ;
+    console.log(this.formData);
+    // this.userService.postUseronBack(formData).subscribe( data => {
+    //       console.log(data) ;
+    // }) ;
   }
 
 }

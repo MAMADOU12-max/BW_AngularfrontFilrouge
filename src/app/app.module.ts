@@ -35,9 +35,11 @@ import { ItemProfilComponent } from './Profil/list-profils/item-profil/item-prof
 import { ItemGrpecompetenceComponent } from './Groupe_de_Competence/list-grpe-competence/item-grpecompetence/item-grpecompetence.component';
 import { ItemCompetenceComponent } from './Competence/list-competence/item-competence/item-competence.component';
 import { ErrorComponent } from './error/error.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { InterceptorInterceptor } from 'src/InterCepteur/interceptor.interceptor';
+import { DefaultimagePipe } from './defaultimage.pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -75,13 +77,15 @@ import { InterceptorInterceptor } from 'src/InterCepteur/interceptor.interceptor
     ItemGrpecompetenceComponent,
     ItemCompetenceComponent,
     ErrorComponent,
+    DefaultimagePipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [
     {

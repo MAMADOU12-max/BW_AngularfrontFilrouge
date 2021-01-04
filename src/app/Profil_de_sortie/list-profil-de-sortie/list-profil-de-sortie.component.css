@@ -13,9 +13,6 @@
   cursor: pointer;
   /*transition: color 6.1s linear;*/
   border-radius: 34px;
-  /*border-radius: 4px;*/
-  /*transition: .6s;*/
-  /*overflow: hidden;*/
 }
 .adding:hover {
   color: #0B87A6;

@@ -8,37 +8,37 @@
   <!--    <a  class="text-right p-2 font-weight-bold" routerLink="/addprofildeSortie"><i class="fa fa-user-plus fa-3x"></i></a>-->
   <!--  </div>-->
 
-  <div class="container signup-form offset-lg-3 offset-sm-1 offset-md-0 offset-0">
+  <div class="container signup-form offset-lg-2 offset-sm-1 offset-md-0 offset-0">
 
     <h1>Edit User</h1>
     <form>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label class="form-label text-white font-weight-bold" for="inputEmail4">Firstname</label>
-          <input type="text" class="form-control" id="inputEmail4" placeholder="firstname">
-          <span class="text-danger">********************</span>
+          <input type="text" class="form-control" id="inputEmail4" value="{{userUpdated.firtname}}" placeholder="firstname">
+          <span class="text-danger"></span>
         </div>
         <div class="form-group col-md-6">
           <label for="inputPassword4" class="form-label text-white font-weight-bold">Lastname</label>
-          <input type="text" class="form-control" id="inputPassword4" placeholder="lastname">
-          <span class="text-danger">********************</span>
+          <input type="text" class="form-control" id="inputPassword4" value="{{userUpdated.lastname}}" placeholder="lastname">
+          <span class="text-danger"></span>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label class="form-label text-white font-weight-bold" for="inputEmail4">Email</label>
-          <input type="email" class="form-control" id="inputEmail5" placeholder="Email">
-          <span class="text-danger">********************</span>
+          <input type="email" class="form-control" id="inputEmail5" value="{{userUpdated?.email}}" placeholder="Email">
+          <span class="text-danger"></span>
         </div>
         <div class="form-group col-md-6">
           <label for="inputPassword4" class="form-label text-white font-weight-bold">Username</label>
-          <input type="password" class="form-control" id="inputPassword6" placeholder="password">
-          <span class="text-danger">********************</span>
+          <input type="password" class="form-control" value="{{userUpdated?.username}}" id="inputPassword6" placeholder="password">
+          <span class="text-danger"></span>
         </div>
       </div>
       <div class="form-group">
         <label for="inputAddress">Address</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+        <input type="text" class="form-control" id="inputAddress" value="{{userUpdated?.adress}}" placeholder="1234 Main St">
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
@@ -47,7 +47,7 @@
         </div>
         <div class="form-group col-md-4">
           <label for="inputState" class="form-label text-white font-weight-bold" placeholder="profil">Profil</label>
-          <select id="inputState" class="form-control" >
+          <select id="inputState" value="{{userUpdated.role}}" class="form-control" >
             <option selected ></option>
             <option>ADMIN</option>
             <option>APPRENANT</option>
@@ -64,10 +64,10 @@
         <div class="form-group col-md-6">
           <input type="file">
         </div>
-        <div class="form-group col-md-4">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, aperiam eaque et fugiat hic
-          impedit ipsam necessitatibus nihil numquam odit repudiandae saepe sed vero
-          voluptates, voluptatibus! Aliquam dolorum earum maiores quas qui rem voluptatibus?
+        <div class="form-group col-md-4 mt-4">
+            <div class="form-group col-md-4">
+                <img src="../../../assets/img/avatar.svg" alt="" class="rounded-circle" style="height: 150px;width: 150px">
+            </div>
         </div>
         <div class="form-group col-md-2">
         </div>

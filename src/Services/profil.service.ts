@@ -21,6 +21,7 @@ export class ProfilService {
 
     constructor(private  httpClient: HttpClient) { }
 
+  // tslint:disable-next-line:typedef
     getallprofil() {
         return this.httpClient.get(this.urlEnv + '/admin/profils?Archivage=0')  ;
     }
@@ -37,7 +38,8 @@ export class ProfilService {
       );
     }
 
-    //delete id
+    // delete id
+  // tslint:disable-next-line:typedef
     deleteProfil(id: number) {
         return this.httpClient.delete(`${this.urlEnv}/admin/profils/${id}`).pipe(
           tap(() => {
@@ -47,6 +49,7 @@ export class ProfilService {
     }
 
 //    get profil by Id
+  // tslint:disable-next-line:typedef
     getProfilById(id: number) {
         return this.httpClient.get(`${this.urlEnv}/admin/profils/${id}`);
     }
@@ -62,4 +65,11 @@ export class ProfilService {
           })
       );
     }
+
+    // get Detail profil
+  // tslint:disable-next-line:typedef
+  getDetailProfilfromdb(id: number) {
+      return this.httpClient.get(`${this.urlEnv}/admin/profils/${id}/users`);
+  }
+
 }

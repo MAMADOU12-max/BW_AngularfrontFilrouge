@@ -11,7 +11,6 @@
                 <input type="text" placeholder="nouveau profil de sortie" ngModel name="libelle" class="form-control mt-1" required="">
                 <button class="btn btn-dark mt-1" style="height: 39px" (click)="AddProfSortie(addProfSortie)">Add</button>
             </form>
-<!--            <a  class="text-right p-2 font-weight-bold" routerLink="/addprofildeSortie"><i class="fa fa-user-plus fa-2x"></i></a>-->
           </div>
       </div>
   </div>
@@ -45,17 +44,15 @@
                     <button class="btn btn-danger ml-4 badge-pill" (click)="deleteProfilSortie(ps.id)" style="width: 80px;width: 130px;">Delete</button>
                 </div>
                 <div *ngIf="ps.isEdit">
-                  <i class="fa fa-check-circle fa-3x text-primary mr-5" (click)="EditProfilSortie(ps)"></i>
+                  <i class="fa fa-check-circle fa-3x text-success mr-5" (click)="EditProfilSortie(ps)"></i>
                   <i class="fa fa-ban fa-3x text-danger ml-4" (click)="close(ps)"></i>
-<!--                    <button class="btn btn-dark ml-4 badge-pill" (click)="editPsById(ps)" style="width: 80px;width: 130px;">Edit</button>-->
-<!--                    <button class="btn btn-danger ml-4 badge-pill" (click)="deleteProfilSortie(ps.id)" style="width: 80px;width: 130px;">Delete</button>-->
                 </div>
             </td>
           </tr>
           </tbody>
         </table>
         <div class="d-flex justify-content-center">
-          <pagination-controls id="profilsortie" maxSize="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>
+          <pagination-controls id="profilsortie" (pageChange)="page = $event"></pagination-controls>
         </div>
       </div>
 

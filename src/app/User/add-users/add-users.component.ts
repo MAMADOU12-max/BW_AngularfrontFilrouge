@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../../Services/user.service';
 import {UserModal} from '../../../Modal/UserModal';
+import { MustMatch } from   '../../../Validator/ConfirmedValidator';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-add-users',
@@ -11,58 +14,101 @@ import {UserModal} from '../../../Modal/UserModal';
 export class AddUsersComponent implements OnInit {
 
   formUser: FormGroup | any;
+  submitted = false;
   selectedFile: any ;
+  url: any;
+  msg = '';
   user: UserModal | any;
-  firstname: string | undefined;
+  firtname: string | undefined;
   lastname: string | undefined;
   email: string | undefined;
   password: string | undefined;
+  confirmPassword: string | undefined;
   photo: string | undefined;
   username: string | undefined;
-  profils: string | any ;
-  formData: any ;
+  profils = '' ;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.formUser = this.formBuilder.group({
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      username: ['', [Validators.required]],
-      photo: ['', [Validators.required]],
-      profils: ['', [Validators.required]]
+      firtname: ['', [Validators.required, Validators.minLength(3)]],
+      lastname: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(5)]],
+      confirmPassword: ['', [Validators.required]],
+      profils: ['', [Validators.required]],
+      username: ['', [Validators.required, Validators.minLength(4)]],
+    },{
+      validator: MustMatch('password', 'confirmPassword')
     }) ;
   }
 
+  // tslint:disable-next-line:typedef
+  get Validations() {
+    return this.formUser.controls;
+  }
+
   Uploadefiler(event: any): any {
+    // tslint:disable-next-line:triple-equals
+    if (!event.target.files[0] || event.target.files[0].length == 0) {
+      this.msg = 'You must select an image';
+      console.log('You must select an image');
+      return;
+    }
     this.selectedFile = event.target.files[0] ;
-    // console.log(this.selectedFile) ;
+
+    const mimeType = event.target.files[0].type;
+
+    if (mimeType.match(/image\/*/) == null) {
+      this.msg = 'Only images are supported';
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+
+    // tslint:disable-next-line:variable-name
+    reader.onload = (_event) => {
+      this.msg = '';
+      this.url = reader.result;
+    };
   }
 
   // tslint:disable-next-line:typedef
   addUser() {
-    const formValue = this.formUser.value ;
-    this.formData = new FormData();
+    this.submitted = true;
+    if (this.formUser.invalid) {
+      return;
+    }
 
+    const formValue = this.formUser.value ;
+    // console.log(formValue);
+    const formData = new FormData();
+    // console.log(formValue);
+    // formData.append('firtname', this.formUser.value.firtname);
+    // formData.append('lastname', this.formUser.value.lastname);
+    // formData.append('email', this.formUser.value.email);
+    // formData.append('password', this.formUser.value.password);
+    // formData.append('username', this.formUser.value.username);
+    // formData.append('profils', this.formUser.value.profils);
     for (const key of Object.keys(formValue)) {
       if (key !== 'photo') {
           const value =  formValue[key] ;
           // console.log(value);
-          this.formData.append(key, value) ;
+          formData.append(key, value) ;
         }
         // console.log(formData) ;
     }
-    // const cool = 'test' ;
-    this.formData.append('photo',  this.selectedFile) ;
-    // this.formData.append('photo',  cool) ;
-
-    // return formData ;
-    console.log(this.formData);
-    // this.userService.postUseronBack(formData).subscribe( data => {
-    //       console.log(data) ;
-    // }) ;
+    if (this.selectedFile) {
+        formData.append('photo',  this.selectedFile) ;
+    }
+    this.userService.postUseronBack(formData).subscribe( data => {
+          this.router.navigate(['listUsers']);
+          alert('user added with success!');
+    }, error => {
+      console.log(error);
+    }) ;
   }
 
 }

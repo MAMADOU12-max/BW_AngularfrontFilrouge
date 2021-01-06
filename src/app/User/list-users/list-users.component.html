@@ -26,7 +26,21 @@
                                                       itemsPerPage: 5,
                                                       currentPage: page,
                                                       totalItems: totalUsers }">
-          <td scope="row"><img src="data:image/jpg;base64,{{user.photo}}" class="img-thumbnail" alt="" style="height: 60px;width: 60px"></td>
+          <td scope="row">
+              <span *ngIf="user.photo">
+                 <img src="data:image/jpeg;base64,{{user.photo }}" class="img-thumbnail"  alt="" style="height: 60px;width: 60px">
+              </span>
+              <span *ngIf="!user.photo">
+                  <img src="assets/img/avatar1.png" class="img-thumbnail"  alt="" style="height: 60px;width: 60px">
+              </span>
+          </td>
+<!--            <ng-template #elseBlock>-->
+<!--              <td scope="row" *ngIf="user.photo">-->
+<!--                <div>-->
+<!--                  <img src="data:image/jpeg;base64,{{user.photo }}" class="img-thumbnail"  alt="" style="height: 60px;width: 60px">-->
+<!--                </div>-->
+<!--              </td>-->
+<!--            </ng-template>-->
           <td  class="align-content-center">{{user.username}}</td>
 <!--          <td class="align-content-center">{{user.lastname}}</td>-->
           <td >{{user.email}}</td>
@@ -34,13 +48,13 @@
           <td class="float-right ">
             <button class="btn btn-primary  badge-pill" style="width: 80px;" routerLink="/listUsers/{{user.id}}/detail">Details</button>
             <button class="btn btn-dark  badge-pill" style="width: 80px;" routerLink="/editUser/{{user.id}}">Edit</button>
-            <button class="btn btn-danger  badge-pill" style="width: 80px;">Delete</button>
+            <button class="btn btn-danger  badge-pill" style="width: 80px;" (click)="deleteUser(user.id)">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
     <div class="d-flex justify-content-center">
-        <pagination-controls id="foo" maxSize="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>
+        <pagination-controls id="foo" (pageChange)="page = $event"></pagination-controls>
     </div>
   </div>
 <!--  <div class="middle col-12">-->

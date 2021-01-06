@@ -10,17 +10,21 @@ import {ActivatedRoute} from '@angular/router';
 export class DetailProfilComponent implements OnInit {
 
   profils: any = [];
+  totalprofils: number | undefined;
+  page = 0;
+
   constructor(private profilService: ProfilService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( (p) => {
 
       const id = this.activatedRoute.snapshot.params.id ;
-      console.log(id) ;
+      // console.log(id) ;
      // @ts-ignore
       this.profilService.getDetailProfilfromdb(id).subscribe( data => {
-          console.log(data) ;
+          // console.log(data) ;
           this.profils = data;
+          this.totalprofils = this.profils.users.length ;
         });
     });
   }

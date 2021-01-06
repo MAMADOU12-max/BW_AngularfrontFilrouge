@@ -11,45 +11,50 @@
     <div class="row">
         <div class="col-lg-6 col-md-12 col-sm-12 col-12 offset-lg-1 offset-0">
             <div class="col-lg-12 mt-2 mb-2 rounded-3">
-                <form action="" class="form-groupe" [formGroup]="formGroup" (ngSubmit)="addingProfil()">
-                    <div class="d-flex flex-row" style="box-shadow: 10px 5px 5px gray;">
-                        <input type="text" class="form-control" [(ngModel)]="libelle"
-                               formControlName="libelle" placeholder="enter a new profil" style="width: 95%">
-                        <button class="btn btn-dark">Add Profil</button>
-                    </div>
+                <form action="" class="d-flex" [formGroup]="formGroup" (ngSubmit)="addingProfil()">
+                    <input type="text" placeholder="new profil" formControlName="libelle"  name="libelle" class="form-control mt-1" required [(ngModel)]="libelle">
+                    <button class="btn btn-dark mt-1" style="height: 39px" >Add New Profil</button>
                 </form>
             </div>
             <table class="table table-hover" style="box-shadow: 10px 5px 5px gray; background-color: white">
                   <thead class="bg-dark">
                       <tr>
-                          <th scope="col" class="text-white">Libelle</th>
+                          <th scope="col" class="text-white text-center">Libelle</th>
                           <th scope="col" class="text-white text-center">Actions</th>
                       </tr>
                   </thead>
                   <tbody>
-
-                  <tr *ngFor="let profil of profils | paginate: { id: 'profil',
-                                                      itemsPerPage: 5,
-                                                      currentPage: page,
-                                                      totalItems: totalProfils }">
-                      <td class="align-items-center text-center">{{profil.libelle}}</td>
-                      <td class="text-center">
-                          <button class="btn btn-primary  badge-pill mb-3" style="" routerLink="/listProfil/{{profil.libelle}}/{{profil.id}}">List</button> &nbsp;
-                          <span>
-                              <a routerLink="/listProfil/{{profil.id}}/edit"><i class="fa fa-edit fa-2x text-info"></i></a> &nbsp;
-                              <a routerLink="/listProfil" (click)="deletingprofil(profil.id)" ><i class="fa fa-trash fa-2x text-danger" ></i></a>
-
-                          </span>
-                      </td>
-                  </tr>
-
-                </tbody>
+                      <tr *ngFor="let profil of profils | paginate: { id: 'profil',
+                                                          itemsPerPage: 5,
+                                                          currentPage: page,
+                                                          totalItems: totalProfils }">
+                          <td class="align-items-center text-center">
+                              <div *ngIf="!profil.isEdit">
+                                  {{profil.libelle}}
+                              </div>
+                              <div *ngIf="profil.isEdit">
+                                  <input type="text" class="form-control" [(ngModel)]="profil.libelle">
+                              </div>
+                          </td>
+                          <td class="text-center">
+                              <span *ngIf="!profil.isEdit">
+                                  <a  (click)="wantEdit(profil)"><i class="fa fa-edit fa-2x text-info"></i></a> &nbsp;
+                                  <a routerLink="/listProfil" (click)="deletingprofil(profil.id)" ><i class="fa fa-trash fa-2x text-danger" ></i></a>
+                              </span>
+                              <span *ngIf="profil.isEdit">
+                                  <i class="fa fa-check-circle fa-2x text-success mr-3" (click)="editingProfil(profil)"></i>
+                                  <i class="fa fa-ban fa-2x text-danger" (click)="close(profil)"></i>
+                              </span>
+                              <button class="btn btn-primary  badge-pill mb-3 ml-3" style="" routerLink="/listProfil/{{profil.libelle}}/{{profil.id}}">List</button> &nbsp;
+                          </td>
+                      </tr>
+                  </tbody>
               </table>
             <div class="d-flex justify-content-center">
-              <pagination-controls id="profil" maxSize="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>
+              <pagination-controls id="profil" (pageChange)="page = $event"></pagination-controls>
             </div>
         </div>
-        <div class="col-lg-5 col-md-12 col-sm-12 col-12 mt-md-5 ">
+        <div class="col-lg-5 col-md-12 col-sm-12 col-12 mt-2 md-5 ">
             <router-outlet></router-outlet>
         </div>
     </div>

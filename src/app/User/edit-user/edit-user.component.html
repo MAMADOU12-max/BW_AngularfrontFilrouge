@@ -1,86 +1,89 @@
+<!--begin edit-->
 <app-header></app-header>
 <app-sidebar></app-sidebar>
 
-<div class="adduser">
-
-  <!--  <div class="d-flex justify-content-between col-12 d-inline-block">-->
-  <!--    <h1 class="text-center p-2 font-weight-bold">Listes des Profils de sortie</h1>-->
-  <!--    <a  class="text-right p-2 font-weight-bold" routerLink="/addprofildeSortie"><i class="fa fa-user-plus fa-3x"></i></a>-->
-  <!--  </div>-->
-
-  <div class="container signup-form offset-lg-2 offset-sm-1 offset-md-0 offset-0">
-
-    <h1>Edit User</h1>
-    <form>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label class="form-label text-white font-weight-bold" for="inputEmail4">Firstname</label>
-          <input type="text" class="form-control" id="inputEmail4" value="{{userUpdated.firtname}}" placeholder="firstname">
-          <span class="text-danger"></span>
+<div class="container d-flex justify-content-center">
+  <div class="row  signup-form col-10  offset-md-2 offset-sm-1">
+    <div class="col-12 ">
+      <span class="d-flex justify-content-start text-white mt-4"><i class="fa fa-arrow-circle-left fa-3x"></i></span>
+      <h1>Edit User</h1>
+      <form (ngSubmit)="UpdatingUser()" [formGroup]="dataUsers">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label class="form-label text-white font-weight-bold" for="inputEmail4">Firstname</label>
+            <input type="text" class="form-control" id="inputEmail4" placeholder="firstname" name="firstname"
+                   formControlName="firstname" [(ngModel)]="firstname">
+            <span class="text-danger"></span>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4" class="form-label text-white font-weight-bold">Lastname</label>
+            <input type="text" class="form-control" id="inputPassword4" placeholder="lastname" name="lastname"
+                   formControlName="lastname" [(ngModel)]="lastname">
+            <span class="text-danger"></span>
+          </div>
         </div>
-        <div class="form-group col-md-6">
-          <label for="inputPassword4" class="form-label text-white font-weight-bold">Lastname</label>
-          <input type="text" class="form-control" id="inputPassword4" value="{{userUpdated.lastname}}" placeholder="lastname">
-          <span class="text-danger"></span>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label class="form-label text-white font-weight-bold" for="inputEmail4">Email</label>
+            <input type="email" class="form-control" id="inputEmail5" placeholder="Email" name="email"
+                   formControlName="email" [(ngModel)]="email">
+            <span class="text-danger"></span>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4" class="form-label text-white font-weight-bold">Password</label>
+            <input type="password" class="form-control" id="inputPassword6" placeholder="password" name="password"
+                   formControlName="password" [(ngModel)]="password">
+            <span class="text-danger"></span>
+          </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label class="form-label text-white font-weight-bold" for="inputEmail4">Email</label>
-          <input type="email" class="form-control" id="inputEmail5" value="{{userUpdated?.email}}" placeholder="Email">
-          <span class="text-danger"></span>
+        <div class="form-group">
+          <label for="inputAddress" class="text-white font-weight-bold">Username</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="username" name="username"
+                 formControlName="username" [(ngModel)]="username">
         </div>
-        <div class="form-group col-md-6">
-          <label for="inputPassword4" class="form-label text-white font-weight-bold">Username</label>
-          <input type="password" class="form-control" value="{{userUpdated?.username}}" id="inputPassword6" placeholder="password">
-          <span class="text-danger"></span>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputCity" class="form-label text-white font-weight-bold">Type</label>
+            <input type="text" class="form-control" id="inputCity">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputState" class="form-label text-white font-weight-bold" placeholder="profil">Profil</label>
+            <select formControlName="profils" name="profils" id="inputState" class="form-control" >
+              <option selected ></option>
+              <option value="ADMIN">ADMIN</option>
+              <option value="APPRENANT">APPRENANT</option>
+              <option value="CM">CM</option>
+              <option value="FORMATEUR">FORMATEUR</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputZip" class="form-label text-white font-weight-bold">Zip</label>
+            <input type="text" class="form-control" id="inputZip">
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="inputAddress">Address</label>
-        <input type="text" class="form-control" id="inputAddress" value="{{userUpdated?.adress}}" placeholder="1234 Main St">
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="inputCity" class="form-label text-white font-weight-bold">City</label>
-          <input type="text" class="form-control" id="inputCity">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <input type="file" name="photo" formControlName="photo" [(ngModel)]="photo" (change)="Uploadefiler($event)">
+          </div>
+          <div class="form-group col-md-4">
+            <img src="../../../assets/img/avatar.svg" alt="" class="rounded-circle" style="height: 140px;width: 140px">
+          </div>
+          <div class="form-group col-md-2">
+          </div>
         </div>
-        <div class="form-group col-md-4">
-          <label for="inputState" class="form-label text-white font-weight-bold" placeholder="profil">Profil</label>
-          <select id="inputState" value="{{userUpdated.role}}" class="form-control" >
-            <option selected ></option>
-            <option>ADMIN</option>
-            <option>APPRENANT</option>
-            <option>CM</option>
-            <option>FORMATEUR</option>
-          </select>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label text-white" for="gridCheck">
+              Check me out
+            </label>
+          </div>
         </div>
-        <div class="form-group col-md-2">
-          <label for="inputZip" class="form-label text-white font-weight-bold">Zip</label>
-          <input type="text" class="form-control" id="inputZip">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <input type="file">
-        </div>
-        <div class="form-group col-md-4 mt-4">
-            <div class="form-group col-md-4">
-                <img src="../../../assets/img/avatar.svg" alt="" class="rounded-circle" style="height: 150px;width: 150px">
-            </div>
-        </div>
-        <div class="form-group col-md-2">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="gridCheck">
-          <label class="form-check-label text-white" for="gridCheck">
-             Check me out
-          </label>
-        </div>
-      </div>
-      <button type="submit" class="mt-3 font-weight-bold rounded h4 btn-outline-dark" routerLink="/listUsers" style="margin-bottom: 12px">Update</button>
-    </form>
+        <button type="submit" class="mt-3 font-weight-bold rounded h4 btn-outline-dark"
+                style="margin-bottom: 12px">Sign in</button>
+      </form>
+    </div>
   </div>
 </div>
+
+<!--end Edit-->

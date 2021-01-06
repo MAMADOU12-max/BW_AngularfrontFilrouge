@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'defaultimage'
+  name: 'telephone'
 })
-export class DefaultimagePipe implements PipeTransform {
+export class TelephonePipe implements PipeTransform {
 
   transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+    return 'Null';
   }
 
 }

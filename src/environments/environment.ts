@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false ,
-  Url_base: '/api'
+  Url_base: 'http://127.0.0.1:8000/api'
 };
 
 /*

@@ -10,14 +10,19 @@ import {UserModal} from '../../../Modal/UserModal';
 })
 export class DetailUserComponent implements OnInit {
 
+  myAngularxQrCode: any | undefined;
   userSelected: any;
-  constructor(private activatedRoute: ActivatedRoute, private userService: UserService) { }
+  constructor(private activatedRoute: ActivatedRoute, private userService: UserService) {
+    // assign a value
+      this.myAngularxQrCode = 'Your QR code data string is nulll';
+  }
 
   ngOnInit(): void {
      const idUser = +this.activatedRoute.snapshot.params.id ;
      this.userService.getUserByIdfromdb(idUser).subscribe( data => {
        // console.log(data) ;
        this.userSelected = data ;
+       // this.myAngularxQrCode = this.userSelected;
        console.log(this.userSelected);
      });
   }

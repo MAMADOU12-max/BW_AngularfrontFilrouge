@@ -1,24 +1,33 @@
 
-<table class="table table-hover" style="box-shadow: 10px 5px 5px gray; background-color: white">
+<table class="table table-hover mt-5" style="box-shadow: 10px 5px 5px gray;background-color: white">
     <thead class="bg-dark">
         <tr>
-            <th scope="col" class="text-white">Id</th>
+            <th scope="col" class="text-white text-center">Id</th>
             <th></th>
             <th scope="col" class="text-white text-center">Username</th>
             <th scope="col" class="text-white text-center">Avatar</th>
         </tr>
     </thead>
     <tbody>
-
-    <tr *ngFor="let user of profils.users" >
-        <td class="text-center justify-content-center font-weight-bold d-flex align-self-center m-4">{{user?.id}}</td>
-      <td></td>
-        <td class="text-center justify-content-center font-weight-bold d-flex align-self-center m-4" style="padding-top: 12px"><h5>{{user?.username}}</h5></td>
-        <td class="text-center rounded">
-              <img class="rounded-circle" style="height: 60px;width: 60px"
-                                         src="data:image/jpg;base64,{{user?.photo}}"/>
-        </td>
-    </tr>
-
+        <tr *ngFor="let user of profils.users | paginate: { id: 'profil',
+                                                          itemsPerPage: 4,
+                                                          currentPage: page,
+                                                          totalItems: totalprofils }" >
+            <td class="text-center justify-content-center font-weight-bold d-flex align-self-center m-4">{{user?.id}}</td>
+            <td></td>
+              <td class="text-center justify-content-center font-weight-bold d-flex align-self-center m-4" style="padding-top: 12px"><h5>{{user?.username}}</h5></td>
+            <td scope="row">
+                    <span *ngIf="user.photo">
+                       <img src="data:image/jpeg;base64,{{user.photo }}" class="img-thumbnail"  alt="" style="height: 60px;width: 60px">
+                    </span>
+                    <span *ngIf="!user.photo">
+                        <img src="assets/img/avatar1.png" class="img-thumbnail"  alt="" style="height: 60px;width: 60px">
+                    </span>
+            </td>
+        </tr>
     </tbody>
+
 </table>
+<div class="d-flex justify-content-center">
+  <pagination-controls id="profil" (pageChange)="page = $event"></pagination-controls>
+</div>

@@ -9,13 +9,22 @@ import {UserService} from '../../../Services/user.service';
 export class ListUsersComponent implements OnInit {
 
   users: any = [] ;
-  page: number | any = 1;
-  totalUsers: number | any;
+  page: number | undefined = 1;
+  totalUsers: number | undefined;
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.userService.refresNeeded$.subscribe( () => {
+      this.getAllUsers() ;
+    });
+    this.getAllUsers() ;
+  }
+  // tslint:disable-next-line:typedef
+  public getAllUsers() {
+
     this.userService.getAllUserfromdb().subscribe(data => {
       this.users = data ;
+      // console.log(this.users) ;
       // this.users = data.results;
       this.totalUsers = this.users.length ;
 
@@ -23,4 +32,12 @@ export class ListUsersComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
+  deleteUser(id: number) {
+    if (confirm('Are you sure that you remove this user?')) {
+        this.userService.deletUserfromdb(id).subscribe(data => {
+          alert('user removed with success');
+        });
+    }
+  }
 }

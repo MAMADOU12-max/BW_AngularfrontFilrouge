@@ -13,7 +13,9 @@
                 <div class="frontside">
                   <div class="card">
                     <div class="card-body text-center">
-                      <p><img class="rounded-circle"  src="data:image/jpg;base64,{{userSelected.photo}}" alt="card image"
+                      <p *ngIf="userSelected.photo"><img class="rounded-circle"  src="data:image/jpg;base64,{{userSelected.photo}}" alt="card image"
+                              alt="" style="height: 120px;width: 120px"></p>
+                      <p *ngIf="!userSelected.photo"><img class="rounded-circle"  src="assets/img/avatar1.png" alt="card image"
                               alt="" style="height: 120px;width: 120px"></p>
                       <h4 class="card-title">{{userSelected.username}}</h4>
                       <br>
@@ -27,11 +29,20 @@
                           >Username</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;{{userSelected.username}} </div>
                           <div class="col-lg-6 col-md-12"><span  class="font-weight-bold h4" style="text-decoration: underline;">
                             Telephone</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;
-                            {{userSelected.telephone}}</div>
+                            {{userSelected.telephone | telephone}}</div>
+                          <div class="col-12 invisible">**************</div>
+                          <div class="col-lg-6 col-md-12"><span class="font-weight-bold h4" style="text-decoration: underline;"
+                          >Email</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;{{userSelected.email}} </div>
+                          <div class="col-lg-6 col-md-12"><span  class="font-weight-bold h4" style="text-decoration: underline;">
+                              Role</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;
+                            {{userSelected.roles | telephone}}</div>
                           <div class="col-12 invisible">**************</div>
                       </div>
                       <p class="card-text">This is basic card with image on top, title, description and button.</p>
                       <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                      <div>
+                        <qrcode [qrdata]="'Your data string'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+                      </div>
                     </div>
                   </div>
                 </div>

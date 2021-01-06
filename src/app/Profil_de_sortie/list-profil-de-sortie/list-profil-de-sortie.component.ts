@@ -9,8 +9,8 @@ import {NgForm} from '@angular/forms';
 })
 export class ListProfilDeSortieComponent implements OnInit {
 
-  page: number | any = 1;
-  totalProfilsSortie: number | any;
+  page: number | undefined = 1;
+  totalProfilsSortie: number | undefined;
   libelle = '';
   isEdit: boolean | undefined;
   profilSorties: any = [] ;
@@ -50,6 +50,7 @@ export class ListProfilDeSortieComponent implements OnInit {
     // console.log(libelleps.value) ;
     this.profildeSortieService.postprofildeSortieondb(libelleps.value).subscribe(libelle => {
         alert('profil added');
+        libelleps.reset(''); // reset value way2
     });
   }
 

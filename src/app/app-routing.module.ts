@@ -23,7 +23,6 @@ import {EditProfilComponent} from './Profil/edit-profil/edit-profil.component';
 import {ErrorComponent} from './error/error.component';
 import {LoginRoute} from './login/login.route';
 import {DetailProfilComponent} from './Profil/detail-profil/detail-profil.component';
-import {HeaderComponent} from './header/header.component';
 
 const routes: Routes = [
   LoginRoute,

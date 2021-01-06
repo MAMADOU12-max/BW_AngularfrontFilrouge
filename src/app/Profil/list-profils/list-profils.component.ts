@@ -11,11 +11,12 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class ListProfilsComponent implements OnInit {
 
 
-  page: number | any = 1;
-  totalProfils: number | any;
+  page: number | undefined = 1;
+  totalProfils: number | undefined;
   profils: any = [];
   libelle = '';
   formGroup: FormGroup | any;
+  isEdit: boolean | undefined;
 
   constructor(private profilService: ProfilService, private formBuilder: FormBuilder) { }
 
@@ -38,6 +39,7 @@ export class ListProfilsComponent implements OnInit {
     // console.log(this.libelle);
     this.profilService.postProfil(this.libelle).subscribe(data => {
       alert('profil added with success');
+      this.libelle = '';
     });
   }
 
@@ -58,11 +60,30 @@ export class ListProfilsComponent implements OnInit {
     this.profilService.getallprofil().subscribe(data => {
       this.profils = data ;
       this.totalProfils = this.profils.length ;
-
+      // tslint:disable-next-line:no-shadowed-variable
+      this.profils.forEach( (element: { isEdit: boolean; }) => {
+          element.isEdit = false ;
+      });
     });
   }
 
+  // tslint:disable-next-line:typedef
+  wantEdit(profil: any) {
+    profil.isEdit = true;
+  }
 
+  // tslint:disable-next-line:typedef
+  close(profil: any) {
+      profil.isEdit = false ;
+  }
+
+  // tslint:disable-next-line:typedef
+  editingProfil(data: any) {
+    this.profilService.editProfil(data.id, data.libelle).subscribe( edited => {
+          alert('profil updated') ;
+          data.libelle = ''; // reset value way1
+      }) ;
+  }
 }
 
 

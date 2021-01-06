@@ -5,11 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DefaultimagePipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    if (!value) {
-      return 'avatar.svg';
+  transform(value: string, args: any): string {
+    if (value === null) {
+          return '';
+       }else{
+      return value;
     }
-    return value;
   }
 
 }

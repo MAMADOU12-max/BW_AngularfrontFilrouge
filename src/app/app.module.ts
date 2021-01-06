@@ -31,15 +31,16 @@ import { EditPromotionComponent } from './Promotion/edit-promotion/edit-promotio
 import { ItemReferentielComponent } from './Referentiel/list-referentiel/item-referentiel/item-referentiel.component';
 import { ItemPromotionComponent } from './Promotion/list-promotion/item-promotion/item-promotion.component';
 import { ItemProfildesortieComponent } from './Profil_de_sortie/list-profil-de-sortie/item-profildesortie/item-profildesortie.component';
-import { ItemProfilComponent } from './Profil/list-profils/item-profil/item-profil.component';
 import { ItemGrpecompetenceComponent } from './Groupe_de_Competence/list-grpe-competence/item-grpecompetence/item-grpecompetence.component';
 import { ItemCompetenceComponent } from './Competence/list-competence/item-competence/item-competence.component';
 import { ErrorComponent } from './error/error.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { InterceptorInterceptor } from 'src/InterCepteur/interceptor.interceptor';
-import { DefaultimagePipe } from './defaultimage.pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {TelephonePipe} from '../Pipes/telephone.pipe';
+import {DefaultimagePipe} from '../Pipes/defaultimage.pipe';
+import {QRCodeModule} from 'angularx-qrcode';
 
 
 @NgModule({
@@ -73,11 +74,11 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ItemReferentielComponent,
     ItemPromotionComponent,
     ItemProfildesortieComponent,
-    ItemProfilComponent,
     ItemGrpecompetenceComponent,
     ItemCompetenceComponent,
     ErrorComponent,
     DefaultimagePipe,
+    TelephonePipe,
   ],
   imports: [
     BrowserModule,
@@ -85,7 +86,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    QRCodeModule
   ],
   providers: [
     {

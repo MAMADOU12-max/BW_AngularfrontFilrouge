@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {JwtHelperService} from "@auth0/angular-jwt";
-import {map} from "rxjs/operators";
-import {Router} from "@angular/router";
+import {environment} from '../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {map} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 export class AuthService {
 
   private urlEnv = environment.Url_base ;
-  roleuser: string =  '' ;
+  roleuser =  '' ;
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
@@ -39,6 +39,7 @@ export class AuthService {
       ) ;
   }
 
+  // tslint:disable-next-line:typedef
   getToken() {
       const token = localStorage.getItem('token') ;
       if (token !== 'undefined') {
@@ -47,4 +48,10 @@ export class AuthService {
       return null ;
   }
 
+  // tslint:disable-next-line:typedef
+  logout() {
+    const token = localStorage.getItem('token') ;
+    return  localStorage.clear();
+    return token;
+  }
 }

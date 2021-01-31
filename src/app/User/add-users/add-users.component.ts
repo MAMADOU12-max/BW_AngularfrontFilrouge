@@ -39,7 +39,7 @@ export class AddUsersComponent implements OnInit {
       confirmPassword: ['', [Validators.required]],
       profils: ['', [Validators.required]],
       username: ['', [Validators.required, Validators.minLength(4)]],
-    },{
+    }, {
       validator: MustMatch('password', 'confirmPassword')
     }) ;
   }
@@ -109,6 +109,13 @@ export class AddUsersComponent implements OnInit {
     }, error => {
       console.log(error);
     }) ;
+  }
+
+  // tslint:disable-next-line:typedef
+  return() {
+    if (confirm('You are about to quit this page')) {
+       this.router.navigate(['/listUsers']);
+    }
   }
 
 }

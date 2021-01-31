@@ -1,1 +1,51 @@
-<p>edit-grpe-competence works!</p>
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+
+<div class="container signup-form offset-lg-2 offset-sm-1 offset-md-0 offset-0 ">
+    <span class="d-flex justify-content-start text-white mt-4" (click)="return()"><i class="fa fa-arrow-circle-left fa-3x return"></i></span>
+    <h1>Edit groupe de competence</h1>
+    <form (ngSubmit)="editGrpCompetence()" [formGroup]="grpeComptence">
+        <div class="form-group">
+            <label for="inputAddress" class="font-weight-bold text-white mt-3">Libellé</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="write a libelle" [(ngModel)]="libelle" formControlName="libelle">
+            <span class="error" *ngIf="submitted || Validations.libelle.errors && Validations.libelle.touched">
+                  <span *ngIf="Validations.libelle.errors.required">Can't be empty. Please put a libelle</span>
+                  </span>
+            <span *ngIf="uniklibelleBoolean && Validations.libelle.valid" class="error">
+                 This libelle exist already!
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress" class="font-weight-bold text-white mt-3">Descriptif</label>
+            <textarea id="story" name="story" rows="5" cols="33" class="form-control" id="descriptif" placeholder="give a description"
+                      [(ngModel)]="description" formControlName="description">
+            </textarea>
+            <span class="error" *ngIf="submitted || Validations.description.errors && Validations.description.touched">
+                  <span *ngIf="Validations.description.errors.required">Can't be empty. Please put a libelle</span>
+            </span>
+        </div>
+        <div class="form-group col-6 justify-content-center offset-3">
+            <label for="expertise" class="font-weight-bold text-white mt-3 col-sm-2 control-label">Competence</label>
+            <select class="form-control inputstl" id="expertise" multiple [(ngModel)]="competences" formControlName="competences"
+                    (ngModelChange)="optionChoised($event)" >
+                <option class="font-italic font-weight-bold" *ngFor="let competence of Allcompetences" value="/api/admin/competences/{{competence.id}}">
+                  {{competence.nomCompetence}}</option>
+            </select>
+            <span class="error" *ngIf="submitted && !Validations.competences.touched">
+                  <span>You must choose at least a competence!</span>
+            </span>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label text-white" for="gridCheck">
+              Check me out
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="mt-3 font-weight-bold rounded h4 btn-outline-dark"
+                style="margin-bottom: 12px">Edit Groupe Competence</button>
+    </form>
+</div>
+
+

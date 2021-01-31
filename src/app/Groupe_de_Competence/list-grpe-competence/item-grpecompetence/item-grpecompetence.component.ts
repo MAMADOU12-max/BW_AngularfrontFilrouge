@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {GroupeCompetenceService} from '../../../../Services/groupe-competence.service';
 
 @Component({
   selector: 'app-item-grpecompetence',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemGrpecompetenceComponent implements OnInit {
 
-  constructor() { }
+   @Input() ItemgrpeCompetence: any;
+
+  constructor(private groupecompetenceService: GroupeCompetenceService) { }
 
   ngOnInit(): void {
+    // console.log(this.ItemgrpeCompetence);
+  }
+
+  // tslint:disable-next-line:typedef
+  deleteGrpecompetence(id: number) {
+    if (confirm('Are you sure you want delete this?')) {
+        // @ts-ignore
+      this.groupecompetenceService.deleteGrpecompetencefromdb(id).subscribe(data => {
+            alert('competence crew deleted!');
+        });
+    }
   }
 
 }

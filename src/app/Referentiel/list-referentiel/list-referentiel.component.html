@@ -3,18 +3,34 @@
 
 <div class="container offset-lg-2 offset-md-3 offset-sm-1 offset-0">
 
-  <div class="d-flex justify-content-between col-12 d-inline-block">
-      <h1 class="text-center p-2 font-weight-bold">Liste des référentiels</h1>
-      <a  class="text-right p-2 font-weight-bold" routerLink="/addReferentiel"><i class="fa fa-user-plus fa-3x"></i></a>
-  </div>
+    <div class="d-flex justify-content-between col-12 d-inline-block">
+        <h1 class="text-center p-2 font-weight-bold">Liste des référentiels</h1>
+        <div  class="text-right p-2 mt-3 font-weight-bold d-flex">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search" aria-label="Search"
+            [(ngModel)]="search" (ngModelChange)="ToSearch()">
+            <button type="button" class="btn btn-outline-dark btn-rounded" routerLink="/addReferentiel">
+                  <span class="text-primary font-weight-bolder" title="create a new promotion">New Referentiel</span>
+            </button>
+        </div>
+    </div>
 
-  <div class="col-lg-12">
-      <div class="row">
-          <div class="col-lg-4 col-md-6 col-sm-6 col-12  mt-4 mb-4" style="box-shadow: 2px 1px 2px gray;" *ngFor="let referentiel of referentiels">
-               <app-item-referentiel></app-item-referentiel>
-          </div>
-      </div>
-  </div>
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12  mt-4 mb-4" style="box-shadow: 2px 1px 2px gray;"
+                 *ngFor="let referentiel of referentiels |  paginate: {
+                 id: 'ref',
+                 currentPage: pagebegin,
+                 itemsPerPage: 6,
+                 totalItems: totalReferentiels
+               }">
+
+                 <app-item-referentiel [ItemReferentiel]="referentiel"></app-item-referentiel>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <pagination-controls id="ref" (pageChange)="pagebegin = $event"></pagination-controls>
+        </div>
+    </div>
 
 </div>
 

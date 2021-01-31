@@ -20,7 +20,7 @@ export class ProfilService {
     }
 
     constructor(private  httpClient: HttpClient) { }
-
+  //
   // tslint:disable-next-line:typedef
     getallprofil() {
         return this.httpClient.get(this.urlEnv + '/admin/profils?Archivage=0')  ;

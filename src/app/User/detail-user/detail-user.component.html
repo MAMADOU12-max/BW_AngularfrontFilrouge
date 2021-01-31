@@ -13,6 +13,7 @@
                 <div class="frontside">
                   <div class="card">
                     <div class="card-body text-center">
+                      <span class="d-flex justify-content-start text-dark" routerLink="/listUsers"><i class="fa fa-arrow-circle-left fa-3x return"></i></span>
                       <p *ngIf="userSelected.photo"><img class="rounded-circle"  src="data:image/jpg;base64,{{userSelected.photo}}" alt="card image"
                               alt="" style="height: 120px;width: 120px"></p>
                       <p *ngIf="!userSelected.photo"><img class="rounded-circle"  src="assets/img/avatar1.png" alt="card image"
@@ -39,7 +40,7 @@
                           <div class="col-12 invisible">**************</div>
                       </div>
                       <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                      <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                      <a class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                       <div>
                         <qrcode [qrdata]="'Your data string'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
                       </div>

@@ -3,41 +3,34 @@
 
 <div class="container offset-lg-2 offset-md-2 offset-sm-1 offset-0">
 
-  <div class="d-flex justify-content-between col-12 d-inline-block">
-    <h1 class="text-center p-2 font-weight-bold">Listes groupe de competences</h1>
-    <a  class="text-right font-weight-bold mt-4" routerLink="/addPromotion">
-      <button type="button" class="btn btn-outline-dark btn-rounded">
-        <span class="text-primary font-weight-bolder">New Groupe Compétence</span></button>
-    </a>
-  </div>
+    <div class="d-flex justify-content-between col-sm-12 d-inline-block">
+        <h1 class="text-center p-2 font-weight-bold">Listes groupe de competences</h1>
+        <div  class="text-right p-2 mt-3 font-weight-bold d-flex">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+                   [(ngModel)]="search" (ngModelChange)="ToSearch()">
+            <button type="button" class="btn btn-outline-dark btn-rounded" routerLink="/addGrpeCompetence">
+                <span class="text-primary font-weight-bolder">New Groupe Compétence</span>
+            </button>
+        </div>
+    </div>
 
-  <div class="col-lg-12">
-       <div class="row">
-          <div class="col-lg-4 col-md-6 col-sm-6 col-12  mt-4 mb-4" style="box-shadow: 2px 1px 2px gray;"
-                    *ngFor="let grpecompetence of grpecompetences">
-              <app-item-grpecompetence></app-item-grpecompetence>
-          </div>
-      </div>
+    <div class="col-lg-12">
+         <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12  mt-4 mb-4" style="box-shadow: 2px 1px 2px gray;"
+                 *ngFor="let grpecompetence of grpeCompetences | paginate: {
+                    id: 'grpecompetence', itemsPerPage: 6,
+                     currentPage: page,
+                    totalItems: totalGrpecompetences
+                 }">
+                <app-item-grpecompetence [ItemgrpeCompetence]="grpecompetence"
+                ></app-item-grpecompetence>
+            </div>
+        </div>
 
-      <div>
-          <nav aria-label="...">
-            <ul class="pagination pagination-circle">
-              <li class="page-item">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item active" aria-current="page">
-                <a class="page-link" href="#">2<span class="visually-hidden">(current)</span></a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li>
-            </ul>
-          </nav>
-      </div>
-
-  </div>
+        <div class="d-flex justify-content-center">
+           <pagination-controls id="grpecompetence" (pageChange)="page = $event"></pagination-controls>
+        </div>
+    </div>
 </div>
 
 

@@ -41,6 +41,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {TelephonePipe} from '../Pipes/telephone.pipe';
 import {DefaultimagePipe} from '../Pipes/defaultimage.pipe';
 import {QRCodeModule} from 'angularx-qrcode';
+import {SummarizePipe} from '../Pipes/summarize.pipe';
+import { DetailGrpeCompetenceComponent } from './Groupe_de_Competence/detail-grpe-competence/detail-grpe-competence.component';
 
 
 @NgModule({
@@ -79,6 +81,8 @@ import {QRCodeModule} from 'angularx-qrcode';
     ErrorComponent,
     DefaultimagePipe,
     TelephonePipe,
+    SummarizePipe,
+    DetailGrpeCompetenceComponent,
   ],
   imports: [
     BrowserModule,

@@ -23,6 +23,9 @@ import {EditProfilComponent} from './Profil/edit-profil/edit-profil.component';
 import {ErrorComponent} from './error/error.component';
 import {LoginRoute} from './login/login.route';
 import {DetailProfilComponent} from './Profil/detail-profil/detail-profil.component';
+import {UnSavedChangesGuard} from '../Guards/un-saved-changes.guard';
+import {UnSavedAddGrpeCompetenceGuard} from '../Guards/un-saved-add-grpe-competence.guard';
+import {DetailGrpeCompetenceComponent} from './Groupe_de_Competence/detail-grpe-competence/detail-grpe-competence.component';
 
 const routes: Routes = [
   LoginRoute,
@@ -30,7 +33,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'listUsers', component: ListUsersComponent},
       {path: 'listUsers/:id/detail', component: DetailUserComponent},
-  {path: 'addUser', component: AddUsersComponent},
+  {path: 'addUser', component: AddUsersComponent, canDeactivate: [UnSavedChangesGuard]},
   {path: 'editUser/:id', component: EditUserComponent},
   {path: 'listProfil', component: ListProfilsComponent, children: [
       {path: ':id/edit', component: EditProfilComponent},
@@ -39,13 +42,14 @@ const routes: Routes = [
   {path: 'listprofildeSortie', component: ListProfilDeSortieComponent},
   {path: 'addprofildeSortie', component: AddProfilDeSortieComponent},
   {path: 'listGrpeCompetence', component: ListGrpeCompetenceComponent},
-  {path: 'addGrpeCompetence', component: AddGrpeCompetenceComponent},
-  {path: 'editGrpeCompetence', component: EditGrpeCompetenceComponent},
+  {path: 'addGrpeCompetence', component: AddGrpeCompetenceComponent, canDeactivate: [UnSavedAddGrpeCompetenceGuard]},
+  {path: 'editGrpeCompetence/:id', component: EditGrpeCompetenceComponent},
+  {path: 'detailGrpeCompetence/:id', component: DetailGrpeCompetenceComponent},
   {path: 'listCompetence', component: ListCompetenceComponent},
   {path: 'addCompetence', component: AddCompetenceComponent},
   {path: 'listReferentiel', component: ListReferentielComponent},
   {path: 'addReferentiel', component: AddReferentielComponent},
-  {path: 'editReferentiel', component: EditReferentielComponent},
+  {path: 'editReferentiel/:id', component: EditReferentielComponent},
   {path: 'listPromotion', component: ListPromotionComponent},
   {path: 'addPromotion', component: AddPromotionComponent},
   {path: 'editPromotion', component: EditPromotionComponent} ,

@@ -12,9 +12,9 @@
   font-size: 40px;
 }
 
-/*ng-invalid {*/
-/*  border: red 6em solid;*/
-/*}*/
 .error {
   color: #FA8973;
+}
+.return:hover {
+  color: #0B87A6;
 }

@@ -28,7 +28,9 @@ section .section-title {
   margin-bottom: 50px;
   text-transform: uppercase;
 }
-
+.return:hover {
+  color: #0B87A6;
+}
 #team .card {
   border: none;
   background: #ffffff;

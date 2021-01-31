@@ -14,6 +14,9 @@ export class ListProfilDeSortieComponent implements OnInit {
   libelle = '';
   isEdit: boolean | undefined;
   profilSorties: any = [] ;
+  search: string;
+  profilSearched: any;
+
   constructor(private profildeSortieService: ProfilDeSortieService) { }
 
   ngOnInit(): void {
@@ -70,5 +73,22 @@ export class ListProfilDeSortieComponent implements OnInit {
     this.profildeSortieService.putProfildeSortieonDb(data.id, data.libelle).subscribe(() => {
             alert('Profil updated');
     });
+  }
+
+//  search profil de sortie
+  ToSearch() {
+    //no search
+    if (this.search == "") {
+      this.ngOnInit();
+    } else {
+      // if research
+      this.profildeSortieService.getAllprofilDeSortiefromdb().subscribe( data => {
+        this.profilSearched = data;
+
+        this.profilSorties = Object.values(this.profilSearched).filter( res => {
+          return res.libelle.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
+        });
+      });
+    }
   }
 }

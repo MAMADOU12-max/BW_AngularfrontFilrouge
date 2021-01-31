@@ -11,6 +11,9 @@ export class ListUsersComponent implements OnInit {
   users: any = [] ;
   page: number | undefined = 1;
   totalUsers: number | undefined;
+  search: string;
+  usersSearch: any;
+
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
@@ -30,6 +33,25 @@ export class ListUsersComponent implements OnInit {
 
       // console.log(this.totalUsers) ;
     });
+  }
+
+  // search function
+  ToSearch(){
+    //no search
+    if (this.search == "") {
+      this.ngOnInit();
+    } else {
+      // if research
+      this.userService.getAllUserfromdb().subscribe( data => {
+        this.usersSearch = data;
+
+        this.users = Object.values(this.usersSearch).filter( res => {
+          return res.username.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
+          // return res.email.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
+          // return res.firtname.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
+        });
+      });
+    }
   }
 
   // tslint:disable-next-line:typedef

@@ -4,8 +4,14 @@
 <div class="container offset-lg-2 offset-md-3 offset-sm-0 offset-0 pl-0 pl-5">
 
   <div class="d-flex justify-content-between col-12 d-inline-block">
-    <h2 class="text-center p-2 font-weight-bold">Listes Users</h2>
-    <a  class="text-right p-2 font-weight-bold" routerLink="/addUser"><i class="fa fa-user-plus fa-3x"></i></a>
+    <h2 class="text-center font-weight-bold">Listes Users</h2>
+    <div  class="text-right  font-weight-bold d-flex">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search by username" name="search" aria-label="Search"
+             [(ngModel)]="search" (ngModelChange)="ToSearch()">
+      <a type="button" class="text-right pb-5 font-weight-bold"  routerLink="/addUser">
+        <i class="fa fa-user-plus fa-3x"></i>
+      </a>
+    </div>
   </div>
 
   <div class="col-lg-12">

@@ -8,10 +8,12 @@ import {PromotionService} from '../../../Services/promotion.service';
 })
 export class ListPromotionComponent implements OnInit {
 
-  // promos = [1, 2, 3, 4, 5, 6, 7, 8] ;
   pagebegin = 1;
   allPromo: any;
   totalpromo: number | undefined;
+  search: string;
+  searchPromo: any;
+
   constructor(private  promotionService: PromotionService) { }
 
   ngOnInit(): void {
@@ -28,6 +30,22 @@ export class ListPromotionComponent implements OnInit {
       this.allPromo = data;
       this.totalpromo = this.allPromo.length;
     });
+  }
+
+  ToSearch(){
+    //no search
+    if (this.search == "") {
+      this.ngOnInit();
+    } else {
+      // if research
+      this.promotionService.getAllpromofromdb().subscribe( data => {
+        this.searchPromo = data;
+
+        this.allPromo = Object.values(this.searchPromo).filter( res => {
+            return res.libelle.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
+        });
+      });
+    }
   }
 
 }

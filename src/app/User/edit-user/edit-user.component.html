@@ -3,123 +3,125 @@
 <app-sidebar></app-sidebar>
 
 <div class="container d-flex justify-content-center">
-  <div class="row  signup-form col-10  offset-md-2 offset-sm-1">
-    <div class="col-12 ">
-      <span class="d-flex justify-content-start text-white mt-4" (click)="return()"><i class="fa fa-arrow-circle-left fa-3x return"></i></span>
-      <h1>Edit User</h1>
-      <form (ngSubmit)="UpdatingUser()" [formGroup]="dataUsers">
-        <div class="form-row">
-              <div class="form-group col-md-6">
-                    <label class="form-label text-white font-weight-bold" for="inputEmail4">Firstname</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="firstname" name="firstname"
-                           formControlName="firstname" [(ngModel)]="firstname">
-                    <span class="error" *ngIf="submitted || Validations.firstname.errors && Validations.firstname.touched">
-                          <span *ngIf="Validations.firstname.errors.required">Firstname is required</span>
-                          <span *ngIf="Validations.firstname.errors.minlength">Firstname is very short, At least 3 letters</span>
-                    </span>
-              </div>
-              <div class="form-group col-md-6">
-                    <label for="inputPassword4" class="form-label text-white font-weight-bold">Lastname</label>
-                    <input type="text" class="form-control" id="inputPassword4" placeholder="lastname" name="lastname"
-                           formControlName="lastname" [(ngModel)]="lastname">
-                    <span class="error" *ngIf="submitted || Validations.lastname.touched && Validations.lastname.errors">
-                          <span *ngIf="Validations.lastname.errors.required">Lastname is required</span>
-                          <span *ngIf="Validations.lastname.errors.minlength">Lastname is very short, At least 2 letters</span>
-                    </span>
-              </div>
+    <div class="row  signup-form col-10  offset-md-2 offset-sm-1">
+        <div class="col-12 ">
+            <span class="d-flex justify-content-start text-white mt-4" (click)="return()"><i class="fa fa-arrow-circle-left fa-3x return"></i></span>
+            <h1>Edit User</h1>
+            <form (ngSubmit)="UpdatingUser()" [formGroup]="dataUsers">
+                <div class="form-row" >
+                      <div class="form-group col-md-6">
+                            <label class="form-label text-white font-weight-bold" for="inputEmail4">Firstname</label>
+                            <input type="text" class="form-control" id="inputEmail4" placeholder="firstname" name="firtname"
+                                   [(ngModel)]="firtname" formControlName="firtname">
+                            <span class="error" *ngIf="submitted || Validations.firtname.errors && Validations.firtname.touched">
+                                  <span *ngIf="Validations.firtname.errors.required">Firstname is required</span>
+                                  <span *ngIf="Validations.firtname.errors.minlength">Firstname is very short, At least 3 letters</span>
+                            </span>
+                      </div>
+                      <div class="form-group col-md-6">
+                            <label for="inputPassword4" class="form-label text-white font-weight-bold">Lastname</label>
+                            <input type="text" class="form-control" id="inputPassword4" placeholder="lastname" name="lastname"
+                                   [(ngModel)]="lastname" formControlName="lastname">
+                            <span class="error" *ngIf="submitted || Validations.lastname.touched && Validations.lastname.errors">
+                                  <span *ngIf="Validations.lastname.errors.required">Lastname is required</span>
+                                  <span *ngIf="Validations.lastname.errors.minlength">Lastname is very short, At least 2 letters</span>
+                            </span>
+                      </div>
+                </div>
+                <div class="form-row">
+                      <div class="form-group col-md-6">
+                            <label class="form-label text-white font-weight-bold" for="inputEmail4">Email</label>
+                            <input type="email" class="form-control" id="inputEmail5" placeholder="Email" name="email"
+                                    [(ngModel)]="email" formControlName="email">
+                            <span class="error" *ngIf="submitted || Validations.email.touched && Validations.email.errors">
+                                 <span *ngIf="Validations.email.errors.required" >Email is required</span>
+                                 <span *ngIf="Validations.email.errors.email">Email is not valid</span>
+                            </span>
+                      </div>
+                      <div class="form-group col-md-6">
+                            <label for="inputAddress" class="text-white font-weight-bold">Username</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="username" name="username"
+                                  [(ngModel)]="username" formControlName="username">
+                            <span class="error" *ngIf="submitted || Validations.username.touched && Validations.username.errors">
+                                <span *ngIf="Validations.username.errors.required">Username is required</span>
+                                <span *ngIf="Validations.username.errors.minlength">Username is short. This must contains 4 letters at least</span>
+                            </span>
+                      </div>
+                </div>
+                <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <label for="inputPassword4" class="form-label text-white font-weight-bold">New Password</label>
+                          <input type="password" class="form-control" id="inputPassword6" placeholder="password" name="password"
+                                  [(ngModel)]="password" formControlName="password">
+                          <span *ngIf=" submitted || Validations.password.touched && Validations.password.errors" class="error">
+                              <span *ngIf="Validations.password.errors.required">password is required</span>
+                              <span *ngIf="Validations.password.errors.minlength">Password must be at least 6 characters</span>
+                          </span>
+                      </div>
+                      <div class="form-group col-md-6">
+                          <label for="inputPassword4" class="form-label text-white font-weight-bold">Confirmation your new password</label>
+                          <input type="password" class="form-control" id="confimPassword" placeholder="confirm your password please" name="confirmPassword"
+                                  [(ngModel)]="confirmPassword" formControlName="confirmPassword">
+                          <span *ngIf="submitted || Validations.confirmPassword.touched && Validations.confirmPassword.errors" class="error">
+                              <span *ngIf="Validations.confirmPassword.errors.required">Confirm your password please</span>
+                              <span *ngIf="Validations.confirmPassword.errors.mustMatch">Password and Confirm Password must be match.</span>
+                          </span>
+                      </div>
+                </div>
+                <div class="form-row">
+                      <div class="form-group col-md-6">
+                            <label for="inputCity" class="form-label text-white font-weight-bold">Adress</label>
+                            <input type="text" class="form-control" id="inputCity">
+                      </div>
+                      <div class="form-group col-md-4">
+                            <label for="inputState" class="form-label text-white font-weight-bold" placeholder="profil">Profil</label>
+                            <select  name="profils" id="inputState" class="form-control" formControlName="profils">
+                                  <option selected ></option>
+                                  <option value="ADMIN">ADMIN</option>
+                                  <option value="APPRENANT">APPRENANT</option>
+                                  <option value="CM">CM</option>
+                                  <option value="FORMATEUR">FORMATEUR</option>
+                            </select>
+                      </div>
+                      <div class="form-group col-md-2">
+                            <label for="inputZip" class="form-label text-white font-weight-bold">Zip</label>
+                            <input type="text" class="form-control" id="inputZip">
+                      </div>
+                </div>
+                <div class="form-row">
+                      <div class="form-group col-md-6">
+                            <input type="file" name="photo"  [(ngModel)]="photo" (change)="Uploadefiler($event)"  formControlName="photo">
+                      </div>
+                      <div class="form-group col-md-4">
+                            <div [innerHtml]='msg' *ngIf="msg" style="color: #FA8973"></div>
+                            <div *ngIf="url">
+                                <img [src]="url" class="rounded-circle" style="height: 140px;width: 140px">
+                            </div>
+                            <div *ngIf="!url">
+                                <span *ngIf="photoExist">
+                                      <img src="data:image/jpeg;base64,{{userUpdated.photo}}" class="rounded-circle" style="height: 140px;width: 140px">
+                                </span>
+                                <span *ngIf="!photoExist">
+                                     <img src="assets/img/avatar1.png" class="rounded-circle" style="height: 140px;width: 140px">
+                                </span>
+                            </div>
+                      </div>
+                      <div class="form-group col-md-2">
+                      </div>
+                </div>
+                <div class="form-group">
+                      <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label text-white" for="gridCheck">
+                              Check me out
+                            </label>
+                      </div>
+                </div>
+                <button type="submit" class="mt-3 font-weight-bold rounded h4 btn-outline-dark"
+                        style="margin-bottom: 12px">Sign in</button>
+            </form>
         </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label class="form-label text-white font-weight-bold" for="inputEmail4">Email</label>
-            <input type="email" class="form-control" id="inputEmail5" placeholder="Email" name="email"
-                   formControlName="email" [(ngModel)]="email">
-            <span class="error" *ngIf="submitted || Validations.email.touched && Validations.email.errors">
-                 <span *ngIf="Validations.email.errors.required" >Email is required</span>
-                 <span *ngIf="Validations.email.errors.email">Email is not valid</span>
-            </span>
-          </div>
-          <div class="form-group col-md-6">
-              <label for="inputAddress" class="text-white font-weight-bold">Username</label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="username" name="username"
-                     formControlName="username" [(ngModel)]="username">
-            <span class="error" *ngIf="submitted || Validations.username.touched && Validations.username.errors">
-                <span *ngIf="Validations.username.errors.required">Username is required</span>
-                <span *ngIf="Validations.username.errors.minlength">Username is short. This must contains 4 letters at least</span>
-            </span>
-          </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputPassword4" class="form-label text-white font-weight-bold">New Password</label>
-                <input type="password" class="form-control" id="inputPassword6" placeholder="password" name="password"
-                       formControlName="password" [(ngModel)]="password">
-<!--                <span *ngIf="submitted && Validations.password.errors" class="error">-->
-<!--                    <span *ngIf="Validations.password.errors.required">password is required</span>-->
-<!--                    <span *ngIf="Validations.password.errors.minlength">Password must be at least 6 characters</span>-->
-<!--                </span>-->
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputPassword4" class="form-label text-white font-weight-bold">Confirmation your new password</label>
-                <input type="password" class="form-control" id="confimPassword" placeholder="confirm your password please" name="confirmPassword"
-                       formControlName="confirmPassword" [(ngModel)]="confirmPassword">
-<!--                <span *ngIf="submitted || Validations.confirmPassword.touched && Validations.confirmPassword.errors" class="error">-->
-<!--                    <span *ngIf="Validations.confirmPassword.errors.required">Confirm your password please</span>-->
-<!--                    <span *ngIf="Validations.confirmPassword.errors.mustMatch">Password and Confirm Password must be match.</span>-->
-<!--                </span>-->
-            </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="inputCity" class="form-label text-white font-weight-bold">Type</label>
-            <input type="text" class="form-control" id="inputCity">
-          </div>
-          <div class="form-group col-md-4">
-            <label for="inputState" class="form-label text-white font-weight-bold" placeholder="profil">Profil</label>
-            <select formControlName="profils" name="profils" id="inputState" class="form-control" >
-              <option selected ></option>
-              <option value="ADMIN">ADMIN</option>
-              <option value="APPRENANT">APPRENANT</option>
-              <option value="CM">CM</option>
-              <option value="FORMATEUR">FORMATEUR</option>
-            </select>
-          </div>
-          <div class="form-group col-md-2">
-            <label for="inputZip" class="form-label text-white font-weight-bold">Zip</label>
-            <input type="text" class="form-control" id="inputZip">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <input type="file" name="photo" formControlName="photo" [(ngModel)]="photo" (change)="Uploadefiler($event)">
-          </div>
-          <div class="form-group col-md-4">
-              <div [innerHtml]='msg' *ngIf="msg" style="color: #FA8973"></div>
-              <div *ngIf="url">
-                  <img [src]="url" class="rounded-circle" style="height: 140px;width: 140px">
-              </div>
-              <div *ngIf="!url">
-<!--                  <span *ngIf="photoExist">-->
-<!--                        <img [src]="this.userUpdated.photo" class="rounded-circle" style="height: 140px;width: 140px">-->
-<!--                  </span>-->
-                   <img src="assets/img/avatar1.png" class="rounded-circle" style="height: 140px;width: 140px">
-              </div>
-          </div>
-          <div class="form-group col-md-2">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck">
-            <label class="form-check-label text-white" for="gridCheck">
-              Check me out
-            </label>
-          </div>
-        </div>
-        <button type="submit" class="mt-3 font-weight-bold rounded h4 btn-outline-dark"
-                style="margin-bottom: 12px">Sign in</button>
-      </form>
     </div>
-  </div>
 </div>
 
 <!--end Edit-->

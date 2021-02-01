@@ -14,7 +14,7 @@ export class ListProfilDeSortieComponent implements OnInit {
   libelle = '';
   isEdit: boolean | undefined;
   profilSorties: any = [] ;
-  search: string;
+  search ='';
   profilSearched: any;
 
   constructor(private profildeSortieService: ProfilDeSortieService) { }
@@ -85,7 +85,7 @@ export class ListProfilDeSortieComponent implements OnInit {
       this.profildeSortieService.getAllprofilDeSortiefromdb().subscribe( data => {
         this.profilSearched = data;
 
-        this.profilSorties = Object.values(this.profilSearched).filter( res => {
+        this.profilSorties = Object.values(this.profilSearched).filter( (res: any) => {
           return res.libelle.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
         });
       });

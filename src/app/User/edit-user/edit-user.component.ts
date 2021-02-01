@@ -15,9 +15,10 @@ export class EditUserComponent implements OnInit {
   url: any;
   msg = '';
   dataUsers: FormGroup | any;
+  idUserUpdated: number | any;
   userUpdated: UserModal | any ;
   users: UserModal | any = [];
-  firstname: string | undefined;
+  firtname: string | undefined;
   lastname: string | undefined;
   email: string | undefined;
   password: string | undefined;
@@ -27,15 +28,18 @@ export class EditUserComponent implements OnInit {
   username: string | undefined;
   submitted = false;
   profils = '' ;
+  _method: string | any;
+  filterTab = [];
+
   constructor(private activated: ActivatedRoute, private userService: UserService,
               private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
-     const idUserUpdated = +this.activated.snapshot.params.id ;
-     // console.log(idUserUpdated) ;
-     this.userService.getUserByIdfromdb(idUserUpdated).subscribe( data => {
+     this.idUserUpdated = +this.activated.snapshot.params.id ;
+     // console.log(this.idUserUpdated) ;
+     this.userService.getUserByIdfromdb(this.idUserUpdated).subscribe( data => {
           this.userUpdated = data ;
-          this.firstname = this.userUpdated.firtname;
+          this.firtname = this.userUpdated.firtname;
           this.lastname = this.userUpdated.lastname;
           this.email = this.userUpdated.email;
           // this.password = this.userUpdated.password;
@@ -44,19 +48,20 @@ export class EditUserComponent implements OnInit {
           this.photo = this.userUpdated.photo;
           if (this.userUpdated.photo !== null) {
             this.photoExist = true;
-            console.log('photo exist!');
+            // console.log('photo exist!');
             // console.log(this.userUpdated.photo);
           }
      });
      this.dataUsers = this.formBuilder.group({
-       firstname: ['', [Validators.required, Validators.minLength(3)]],
+       firtname: ['',[Validators.required, Validators.minLength(3)]],
        lastname: ['', [Validators.required, Validators.minLength(2)]],
        email: ['', [Validators.required, Validators.email]],
-       // password: ['', [Validators.minLength(5)]],
-       // confirmPassword: [''],
+       password: ['', [Validators.minLength(5)]],
+       confirmPassword: [''],
        username: ['', [Validators.required]],
        photo: ['', [Validators.required]],
-       profils: ['', [Validators.required]]
+       profils: ['', [Validators.required]],
+       _method: ['']
      }, {
        validator: MustMatch('password', 'confirmPassword')
      });
@@ -95,14 +100,29 @@ export class EditUserComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   UpdatingUser() {
-
+    this.dataUsers.value._method = 'PUT';
+    //const method = {_method: 'PUT'};
+   // console.log(method);
+    // Object.values(this.dataUsers.value).forEach((element) =>{
+    //       console.log(element);
+    // })
+    // Object.values(this.dataUsers.value).splice(1, 0);
+    console.log(this.dataUsers.value);
+    //filtre for avoid element confirmPassword
+    // this.filterTab.push({'firstname': this.dataUsers.value.firtname},{'lastname': this.dataUsers.value.lastname},
+    //   {'email': this.dataUsers.value.email},{'_method': this.dataUsers.value._method},{'username': this.dataUsers.value.username});
+    // console.log(this.filterTab);
+    this.userService.updateUser(this.idUserUpdated, this.dataUsers.value).subscribe(data => {
+        alert('userUpdated');
+    });
+    return;
     this.submitted = true;
-    if (this.dataUsers.invalid) {
-      console.log(this.dataUsers);
-      return;
-    }
-
-    console.log(this.dataUsers);
+    // if (this.dataUsers.invalid) {
+    //   console.log(this.dataUsers);
+    //   return;
+    // }
+    //
+    // console.log(this.dataUsers.value);
 
     // this.userService.
   }

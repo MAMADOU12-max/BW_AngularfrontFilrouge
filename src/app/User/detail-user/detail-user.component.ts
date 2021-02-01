@@ -23,7 +23,7 @@ export class DetailUserComponent implements OnInit {
        // console.log(data) ;
        this.userSelected = data ;
        // this.myAngularxQrCode = this.userSelected;
-       console.log(this.userSelected);
+       // console.log(this.userSelected);
      });
   }
 

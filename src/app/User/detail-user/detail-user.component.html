@@ -14,29 +14,29 @@
                   <div class="card">
                     <div class="card-body text-center">
                       <span class="d-flex justify-content-start text-dark" routerLink="/listUsers"><i class="fa fa-arrow-circle-left fa-3x return"></i></span>
-                      <p *ngIf="userSelected.photo"><img class="rounded-circle"  src="data:image/jpg;base64,{{userSelected.photo}}" alt="card image"
+                      <p *ngIf="userSelected?.photo"><img class="rounded-circle"  src="data:image/jpg;base64,{{userSelected.photo}}" alt="card image"
                               alt="" style="height: 120px;width: 120px"></p>
-                      <p *ngIf="!userSelected.photo"><img class="rounded-circle"  src="assets/img/avatar1.png" alt="card image"
+                      <p *ngIf="!userSelected?.photo"><img class="rounded-circle"  src="assets/img/avatar1.png" alt="card image"
                               alt="" style="height: 120px;width: 120px"></p>
-                      <h4 class="card-title">{{userSelected.username}}</h4>
+                      <h4 class="card-title">{{userSelected?.username}}</h4>
                       <br>
                       <div class="row">
                           <div class="col-lg-6 col-md-12"><span class="font-weight-bold h4" style="text-decoration: underline;">
-                            Firstname</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;{{userSelected.firtname}}</div>
+                            Firstname</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;{{userSelected?.firtname}}</div>
                           <div class="col-lg-6 col-md-12"><span  class="font-weight-bold h4" style="text-decoration: underline;" >
-                            Lastname</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;{{userSelected.lastname}}</div>
+                            Lastname</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;{{userSelected?.lastname}}</div>
                           <div class="col-12 invisible">**************</div>
                           <div class="col-lg-6 col-md-12"><span class="font-weight-bold h4" style="text-decoration: underline;"
-                          >Username</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;{{userSelected.username}} </div>
+                          >Username</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;{{userSelected?.username}} </div>
                           <div class="col-lg-6 col-md-12"><span  class="font-weight-bold h4" style="text-decoration: underline;">
                             Telephone</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;
-                            {{userSelected.telephone | telephone}}</div>
+                            {{userSelected?.telephone | telephone}}</div>
                           <div class="col-12 invisible">**************</div>
                           <div class="col-lg-6 col-md-12"><span class="font-weight-bold h4" style="text-decoration: underline;"
-                          >Email</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;{{userSelected.email}} </div>
+                          >Email</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;{{userSelected?.email}} </div>
                           <div class="col-lg-6 col-md-12"><span  class="font-weight-bold h4" style="text-decoration: underline;">
                               Role</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;
-                            {{userSelected.roles | telephone}}</div>
+                            {{userSelected?.roles | telephone}}</div>
                           <div class="col-12 invisible">**************</div>
                       </div>
                       <p class="card-text">This is basic card with image on top, title, description and button.</p>

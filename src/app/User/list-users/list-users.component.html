@@ -37,7 +37,7 @@
                  <img src="data:image/jpeg;base64,{{user.photo }}" class="img-thumbnail"  alt="" style="height: 60px;width: 60px">
               </span>
               <span *ngIf="!user.photo">
-                  <img src="assets/img/avatar1.png" class="img-thumbnail"  alt="" style="height: 60px;width: 60px">
+                  <img src="assets/img/avatar1.png" class="img-thumbnail"  alt="profil" style="height: 60px;width: 60px">
               </span>
           </td>
 <!--            <ng-template #elseBlock>-->
@@ -47,10 +47,10 @@
 <!--                </div>-->
 <!--              </td>-->
 <!--            </ng-template>-->
-          <td  class="align-content-center">{{user.username}}</td>
+          <td  class="align-content-center">{{user?.username }}</td>
 <!--          <td class="align-content-center">{{user.lastname}}</td>-->
-          <td >{{user.email}}</td>
-          <td>{{user.roles}}</td>
+          <td >{{user?.email}}</td>
+          <td>{{user?.roles | cutString}} </td>
           <td class="float-right ">
             <button class="btn btn-primary  badge-pill" style="width: 80px;" routerLink="/listUsers/{{user.id}}/detail">Details</button>
             <button class="btn btn-dark  badge-pill" style="width: 80px;" routerLink="/editUser/{{user.id}}">Edit</button>

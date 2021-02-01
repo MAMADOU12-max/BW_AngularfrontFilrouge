@@ -2,34 +2,39 @@
 <!--mobile navigation bar end-->
 <!--sidebar start-->
 <div class="sidebar">
-  <div class="profile_info">
-    <img src="../../assets/img/1.png" class="profile_image" alt="">
-    <h4>Jessica</h4>
-  </div>
+<!--    avater user coonected -->
+    <div class="profile_info" *ngIf="photoExist">
+        <img src="data:image/jpeg;base64,{{imageUser}}" class="profile_image" alt="">
+        <h4>{{nameUserConnected}}</h4>
+    </div>
+    <div class="profile_info" *ngIf="!photoExist">
+        <img src="assets/img/avatar1.png" class="profile_image" alt="">
+        <h4>{{nameUserConnected}}</h4>
+    </div>
 
-  <!--  menu bar-->
-  <div class="mt-5">
-    <button class="btn-lg btn-block border-0" data-toggle="collapse" data-target="#panneau1" style="box-shadow: 10px 5px 5px gray;background-color: white">
-      User  <i class="fa fa-sort-down"></i>
-    </button>
-    <ul class="collapse list-unstyled" id="panneau1">
-      <li class="list-unstyled p-2 bg-dark" >
-        <a class="text-white h5 font-weight-bold" href="">Settings</a>
-      </li>
-      <li class="list-unstyled p-2 border border-dark bg-dark " style="" >
-        <a href="" class="text-white h5 font-weight-bold" >Logout</a>
-      </li>
-    </ul>
+    <!--  menu bar-->
+    <div class="mt-5">
+        <button class="btn-lg btn-block border-0" data-toggle="collapse" data-target="#panneau1" style="box-shadow: 10px 5px 5px gray;background-color: white">
+          User  <i class="fa fa-sort-down"></i>
+        </button>
+        <ul class="collapse list-unstyled" id="panneau1">
+            <li class="list-unstyled p-2 bg-dark" >
+              <a class="text-white h5 font-weight-bold">Settings</a>
+            </li>
+            <li class="list-unstyled p-2 border border-dark bg-dark " style="" >
+              <a href="" class="text-white h5 font-weight-bold" (click)="logout()">Logout</a>
+            </li>
+        </ul>
 
-    <button class="btn-lg btn-block border-0 mt-3" data-toggle="collapse" data-target="#panneau2" style="box-shadow: 10px 5px 5px gray;background-color: white">
-      More <i class="fa fa-sort-down"></i>
-    </button>
-    <ul class="collapse list-unstyled" id="panneau2">
-      <li class="list-unstyled p-2 bg-dark bg-dark">
-        <a class="text-white h5 font-weight-bold" href="">Dashbord</a>
-      </li>
-    </ul>
-  </div>
+        <button class="btn-lg btn-block border-0 mt-3" data-toggle="collapse" data-target="#panneau2" style="box-shadow: 10px 5px 5px gray;background-color: white">
+          More <i class="fa fa-sort-down"></i>
+        </button>
+        <ul class="collapse list-unstyled" id="panneau2">
+            <li class="list-unstyled p-2 bg-dark bg-dark">
+                <a class="text-white h5 font-weight-bold" >Dashbord</a>
+            </li>
+        </ul>
+    </div>
 
 </div>
 

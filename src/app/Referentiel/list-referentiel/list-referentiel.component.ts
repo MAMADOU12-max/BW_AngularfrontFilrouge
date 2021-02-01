@@ -8,7 +8,7 @@ import {ReferentielService} from "../../../Services/referentiel.service";
 })
 export class ListReferentielComponent implements OnInit {
 
-  search: string ;
+  search = '' ;
   pagebegin = 1;
   totalReferentiels: number | undefined;
   referentiels: any = [] ;
@@ -42,7 +42,7 @@ export class ListReferentielComponent implements OnInit {
       this.referentielService.getAllReferentielfromdb().subscribe( data => {
         this.refs = data;
 
-        this.referentiels = Object.values(this.refs).filter( res => {
+        this.referentiels = Object.values(this.refs).filter( (res: any) => {
             return res.libelle.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
           });
         });

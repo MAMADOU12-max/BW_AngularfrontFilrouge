@@ -58,9 +58,9 @@ export class UserService {
     );
   }
   // tslint:disable-next-line:typedef
-   updateUser(id: number, user: UserModal) {
+   updateUser(id: number, user: any) {
     // @ts-ignore
-    return this.httpClient.put(this.urlEnv + '/admin/users/' + id).pipe(
+    return this.httpClient.post(this.urlEnv + '/admin/users/' + id, user).pipe(
       tap(() => {
         this._refresNeeded$.next();
       })

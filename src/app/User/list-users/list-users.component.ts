@@ -11,7 +11,7 @@ export class ListUsersComponent implements OnInit {
   users: any = [] ;
   page: number | undefined = 1;
   totalUsers: number | undefined;
-  search: string;
+  search = '';
   usersSearch: any;
 
   constructor(private userService: UserService) { }
@@ -45,7 +45,7 @@ export class ListUsersComponent implements OnInit {
       this.userService.getAllUserfromdb().subscribe( data => {
         this.usersSearch = data;
 
-        this.users = Object.values(this.usersSearch).filter( res => {
+        this.users = Object.values(this.usersSearch).filter( (res: any) => {
           return res.username.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
           // return res.email.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
           // return res.firtname.toLocaleLowerCase().match(this.search.toLocaleLowerCase());

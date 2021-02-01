@@ -11,7 +11,7 @@ export class ListGrpeCompetenceComponent implements OnInit {
   page = 1;
   totalGrpecompetences: number | undefined;
   grpeCompetences: any;
-  search: string ;
+  search = '' ;
   grpeCompt: any;
 
   constructor(private groupecompetenceService: GroupeCompetenceService) { }
@@ -33,7 +33,7 @@ export class ListGrpeCompetenceComponent implements OnInit {
       this.groupecompetenceService.getAllGropuecompetencefromdb().subscribe( data => {
         this.grpeCompt = data;
 
-        this.grpeCompetences = Object.values(this.grpeCompt).filter( res => {
+        this.grpeCompetences = Object.values(this.grpeCompt).filter( (res: any) => {
           return res.libelle.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
         });
       });

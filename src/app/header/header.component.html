@@ -70,9 +70,12 @@
 <!--            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
 <!--&lt;!&ndash;          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&ndash;&gt;-->
 <!--        </form>-->
-        <div class="nav-item dropdown bg-dark dropdown-menu-lg-right">
-            <a data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action mt-2 ml-5">
-              <img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="rounded-circle" alt="Avatar">
+        <div class="nav-item dropdown bg-dark dropdown-menu-lg-right text-white">
+            <a *ngIf="photoExist" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action mt-2 ml-5">
+              <img src="data:image/jpeg;base64,{{imageUser}}" class="rounded-circle" alt="Profil" style="height: 40px;width: 40px">
+            </a>
+            <a *ngIf="!photoExist" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action mt-2 ml-5">
+                <img src="assets/img/avatar1.png" class="rounded-circle" alt="profil" style="height: 40px;width: 40px">
             </a>
             <div class="dropdown-menu">
                 <a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>

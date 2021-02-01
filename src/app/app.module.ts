@@ -43,6 +43,7 @@ import {DefaultimagePipe} from '../Pipes/defaultimage.pipe';
 import {QRCodeModule} from 'angularx-qrcode';
 import {SummarizePipe} from '../Pipes/summarize.pipe';
 import { DetailGrpeCompetenceComponent } from './Groupe_de_Competence/detail-grpe-competence/detail-grpe-competence.component';
+import {CutStringPipe} from "../Pipes/cut-string.pipe";
 
 
 @NgModule({
@@ -83,6 +84,7 @@ import { DetailGrpeCompetenceComponent } from './Groupe_de_Competence/detail-grp
     TelephonePipe,
     SummarizePipe,
     DetailGrpeCompetenceComponent,
+    CutStringPipe
   ],
   imports: [
     BrowserModule,

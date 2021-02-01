@@ -11,7 +11,7 @@ export class ListPromotionComponent implements OnInit {
   pagebegin = 1;
   allPromo: any;
   totalpromo: number | undefined;
-  search: string;
+  search = '';
   searchPromo: any;
 
   constructor(private  promotionService: PromotionService) { }
@@ -41,7 +41,7 @@ export class ListPromotionComponent implements OnInit {
       this.promotionService.getAllpromofromdb().subscribe( data => {
         this.searchPromo = data;
 
-        this.allPromo = Object.values(this.searchPromo).filter( res => {
+        this.allPromo = Object.values(this.searchPromo).filter( (res: any) => {
             return res.libelle.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
         });
       });

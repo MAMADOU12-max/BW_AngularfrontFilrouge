@@ -1,0 +1,45 @@
+
+
+.adduser{
+  margin: 0;
+  padding: 0;
+  -moz-background-size: cover;
+  height: 900px;
+  margin-top: -120px;
+  padding-top: 134px;
+}
+.signup-form{
+  background-image: linear-gradient(to right, #868f96 0%, #596164 100%);
+  top: 70%;
+  border-radius: 32px;
+  box-shadow: 10px 5px 5px ;
+}
+
+/********************************************************µDetail User***********************************/
+
+
+section {
+  padding: 60px 0;
+}
+
+section .section-title {
+  text-align: center;
+  color: #007b5e;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+}
+
+#team .card {
+  border: none;
+  background: #ffffff;
+}
+
+.return:hover {
+  color: #0B87A6;
+}
+/*.vertical-line{*/
+/*  border-left: 2px solid #000;*/
+/*  display: inline-block;*/
+/*  height: 130px;*/
+/*  margin: 0 20px;*/
+/*}*/

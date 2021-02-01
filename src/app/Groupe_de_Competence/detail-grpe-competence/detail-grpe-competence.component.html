@@ -1,0 +1,97 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+
+<!-- Team -->
+<section id="team" class="pb-5">
+    <div class="container">
+        <div class="row" >
+            <!-- debut col -->
+            <div class="col-lg-10 offset-lg-2  col-sm-12 col-md-4"  style="box-shadow: 8px 5px 15px gray;">
+                <div class="image-flip" >
+                    <div class="mainflip flip-0">
+                        <div class="frontside">
+
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <span class="d-flex justify-content-start text-dark" routerLink="/listGrpeCompetence"><i class="fa fa-arrow-circle-left fa-3x return"></i></span>
+                                    <h2 style="margin-top: 10px;font-family:cursive;font-size: 40px;">Detail groupe de competence</h2>
+                                    <br>
+                                    <div class="row">
+                                        <!-- Groupe Competence -->
+                                        <div class="col-lg-6 col-md-12 text-left mx-5"><span class="font-weight-bold h4" style="text-decoration: underline;">
+                                                Libelle</span><span class="font-weight-bold h4 text-center">:</span>&nbsp; &nbsp;
+                                                {{detailGrpeCompetence?.libelle}}
+                                        </div>
+                                          <div class="col-12 invisible">**************</div>
+                                        <div class="col-lg-12 col-md-12 text-left mx-5"><span class="font-weight-bold h4" style="text-decoration: underline;"
+                                            >Description</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;
+                                           {{detailGrpeCompetence?.description}}
+                                        </div>
+                                        <div class="col-12 invisible">**************</div>
+
+                                         <div class="col-12">
+                                             <div class="row" *ngFor="let competence of detailGrpeCompetence?.competences">
+                                                  <!--   Competences-->
+                                                  <div class="col-lg-12 col-md-12 m-5"><span class="font-weight-bold h4" style="text-decoration: underline;
+                                                     ">Competences</span><span class="font-weight-bold h4"></span>&nbsp; &nbsp;
+                                                     <div class="col-12 invisible">**************</div>
+                                                      <div class="text-left"><span class="font-weight-bold" style="text-decoration: underline">
+                                                      NomCompetencce</span><span class="font-weight-bold text-center">:</span>&nbsp; &nbsp;
+                                                        {{competence?.nomCompetence}}
+                                                      </div>
+                                                      <div class="col-12 invisible">**************</div>
+                                                      <div class="text-left"><span class="font-weight-bold" style="text-decoration: underline;"
+                                                      >Libelle</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;
+                                                        {{competence?.libelle}}
+                                                      </div>
+                                                  </div>
+                                                  <!-- <span class="vertical-line"></span>-->
+
+                                                  <!--                    niveaux-->
+                                                  <div class="col"><span  class="font-weight-bold h4" style="text-decoration: underline;">
+                                                     </span><span class="font-weight-bold h4"></span>&nbsp; &nbsp;
+                                                      <table class="table table-striped">
+                                                          <thead>
+                                                          <tr>
+                                                              <th scope="col">Niveaux</th>
+                                                              <th scope="col">libelle</th>
+                                                              <th scope="col">critère d'évaluation</th>
+                                                              <th scope="col">groupe d'action</th>
+                                                          </tr>
+                                                          </thead>
+                                                          <tbody  *ngFor="let niveau of competence?.niveaux; let i = index" >
+                                                            <tr>
+                                                                <th scope="row">Niveau {{i+1}}</th>
+                                                                <td>{{niveau?.level}}</td>
+                                                                <td>{{niveau?.groupedAction}}</td>
+                                                                <td>{{niveau?.criteredEvaluation}}</td>
+                                                            </tr>
+                                                          </tbody>
+                                                      </table>
+                                                    <hr>
+                                                  </div>
+                                                  <div class="col-12 invisible">**************</div>
+                                             </div>
+                                         </div>
+
+                                    </div>
+                                    <p class="card-text">This is basic card with image on top, title, description and button.</p>
+                                    <a class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    <div>
+                                          <button type="submit" class="mt-3 font-weight-bold rounded h4 btn-outline-dark" routerLink="/listGrpeCompetence"
+                                                  style="margin-bottom: 12px">List Groupe Competence</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin col -->
+        </div>
+    </div>
+</section>
+<!-- Team -->
+
+
+

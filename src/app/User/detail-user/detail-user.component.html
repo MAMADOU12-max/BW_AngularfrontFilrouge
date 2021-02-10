@@ -36,7 +36,7 @@
                           >Email</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;{{userSelected?.email}} </div>
                           <div class="col-lg-6 col-md-12"><span  class="font-weight-bold h4" style="text-decoration: underline;">
                               Role</span><span class="font-weight-bold h4">:</span>&nbsp; &nbsp;
-                            {{userSelected?.roles | telephone}}</div>
+                            {{userSelected?.roles | cutString}}</div>
                           <div class="col-12 invisible">**************</div>
                       </div>
                       <p class="card-text">This is basic card with image on top, title, description and button.</p>
@@ -44,6 +44,10 @@
                       <div>
                         <qrcode [qrdata]="'Your data string'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
                       </div>
+                    </div>
+                    <div class="text-center p-4">
+                        <button class="btn btn-dark  badge-pill mr-3" style="width:110px;box-shadow: 8px 5px 15px gray;" routerLink="/editUser/{{userSelected?.id}}">Edit User</button>
+                        <button class="btn btn-danger  badge-pill" style="width:110px;box-shadow: 8px 5px 15px gray;" (click)="deleteUser(userSelected?.id)">Delete User</button>
                     </div>
                   </div>
                 </div>

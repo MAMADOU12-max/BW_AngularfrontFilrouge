@@ -13,6 +13,9 @@ export class ListUsersComponent implements OnInit {
   totalUsers: number | undefined;
   search = '';
   usersSearch: any;
+  //Pagination
+  key: string = 'username';
+  reverse: boolean = false;
 
   constructor(private userService: UserService) { }
 
@@ -62,6 +65,7 @@ export class ListUsersComponent implements OnInit {
         });
     }
   }
+
 
   // public function ExcelFile($file_path)
   // {

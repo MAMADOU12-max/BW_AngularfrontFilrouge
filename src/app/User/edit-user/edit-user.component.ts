@@ -11,126 +11,130 @@ import {MustMatch} from '../../../Validator/ConfirmedValidator';
   styleUrls: ['./edit-user.component.css']
 })
 export class EditUserComponent implements OnInit {
-  selectedFile: string | any;
-  url: any;
-  msg = '';
-  dataUsers: FormGroup | any;
-  idUserUpdated: number | any;
-  userUpdated: UserModal | any ;
-  users: UserModal | any = [];
-  firtname: string | undefined;
-  lastname: string | undefined;
-  email: string | undefined;
-  password: string | undefined;
-  confirmPassword: string | undefined;
-  photo: string | undefined;
-  photoExist = false;
-  username: string | undefined;
-  submitted = false;
-  profils = '' ;
-  _method: string | any;
-  filterTab = [];
+    selectedFile: string | any;
+    url: any;
+    msg = '';
+    dataUsers: FormGroup | any;
+    idUserUpdated: number | any;
+    userUpdated: UserModal | any ;
+    users: UserModal | any = [];
+    firtname: string | undefined;
+    lastname: string | undefined;
+    email: string | undefined;
+    password: string | undefined;
+    confirmPassword: string | undefined;
+    photo: string | undefined;
+    photoExist = false;
+    username: string | undefined;
+    submitted = false;
+    errorSubmitted = false;
+    profils = '' ;
 
-  constructor(private activated: ActivatedRoute, private userService: UserService,
-              private formBuilder: FormBuilder, private router: Router) { }
+    constructor(private activated: ActivatedRoute, private userService: UserService,
+                private formBuilder: FormBuilder, private router: Router) { }
 
-  ngOnInit(): void {
-     this.idUserUpdated = +this.activated.snapshot.params.id ;
-     // console.log(this.idUserUpdated) ;
-     this.userService.getUserByIdfromdb(this.idUserUpdated).subscribe( data => {
-          this.userUpdated = data ;
-          this.firtname = this.userUpdated.firtname;
-          this.lastname = this.userUpdated.lastname;
-          this.email = this.userUpdated.email;
-          // this.password = this.userUpdated.password;
-          this.username = this.userUpdated.username;
-          this.profils = this.userUpdated.profils;
-          this.photo = this.userUpdated.photo;
-          if (this.userUpdated.photo !== null) {
-            this.photoExist = true;
-            // console.log('photo exist!');
-            // console.log(this.userUpdated.photo);
-          }
-     });
-     this.dataUsers = this.formBuilder.group({
-       firtname: ['',[Validators.required, Validators.minLength(3)]],
-       lastname: ['', [Validators.required, Validators.minLength(2)]],
-       email: ['', [Validators.required, Validators.email]],
-       password: ['', [Validators.minLength(5)]],
-       confirmPassword: [''],
-       username: ['', [Validators.required]],
-       photo: ['', [Validators.required]],
-       profils: ['', [Validators.required]],
-       _method: ['']
-     }, {
-       validator: MustMatch('password', 'confirmPassword')
-     });
-  }
-
-  // tslint:disable-next-line:typedef
-  get Validations() {
-    return this.dataUsers.controls;
-  }
-
-  Uploadefiler(event: any): any {
-    // tslint:disable-next-line:triple-equals
-    if (!event.target.files[0] || event.target.files[0].length == 0) {
-      this.msg = 'You must select an image';
-      console.log('You must select an image');
-      return;
-    }
-    this.selectedFile = event.target.files[0] ;
-
-    const mimeType = event.target.files[0].type;
-
-    if (mimeType.match(/image\/*/) == null) {
-      this.msg = 'Only images are supported';
-      return;
+    ngOnInit(): void {
+       this.idUserUpdated = +this.activated.snapshot.params.id ;
+       // console.log(this.idUserUpdated) ;
+       this.userService.getUserByIdfromdb(this.idUserUpdated).subscribe( data => {
+            this.userUpdated = data ;
+         // console.log(this.userUpdated);
+            this.firtname = this.userUpdated.firtname;
+            this.lastname = this.userUpdated.lastname;
+            this.email = this.userUpdated.email;
+            this.username = this.userUpdated.username;
+            this.profils = this.userUpdated.profils;
+            this.photo = this.userUpdated.photo;
+            if (this.userUpdated.photo !== null) {
+              this.photoExist = true;
+              // console.log('photo exist!');
+              // console.log(this.userUpdated.photo);
+            }
+       });
+       this.dataUsers = this.formBuilder.group({
+           firtname: ['', [Validators.required, Validators.minLength(3)]],
+           lastname: ['', [Validators.required, Validators.minLength(2)]],
+           email: ['', [Validators.required, Validators.email]],
+           password: ['', [Validators.required, Validators.minLength(5)]],
+           confirmPassword: ['', [Validators.required]],
+           profils: ['', [Validators.required]],
+           username: ['', [Validators.required, Validators.minLength(4)]],
+       }, {
+          validator: MustMatch('password', 'confirmPassword')
+       });
     }
 
-    const reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-
-    // tslint:disable-next-line:variable-name
-    reader.onload = (_event) => {
-      this.msg = '';
-      this.url = reader.result;
-    };
-  }
-
-  // tslint:disable-next-line:typedef
-  UpdatingUser() {
-    this.dataUsers.value._method = 'PUT';
-    //const method = {_method: 'PUT'};
-   // console.log(method);
-    // Object.values(this.dataUsers.value).forEach((element) =>{
-    //       console.log(element);
-    // })
-    // Object.values(this.dataUsers.value).splice(1, 0);
-    console.log(this.dataUsers.value);
-    //filtre for avoid element confirmPassword
-    // this.filterTab.push({'firstname': this.dataUsers.value.firtname},{'lastname': this.dataUsers.value.lastname},
-    //   {'email': this.dataUsers.value.email},{'_method': this.dataUsers.value._method},{'username': this.dataUsers.value.username});
-    // console.log(this.filterTab);
-    this.userService.updateUser(this.idUserUpdated, this.dataUsers.value).subscribe(data => {
-        alert('userUpdated');
-    });
-    return;
-    this.submitted = true;
-    // if (this.dataUsers.invalid) {
-    //   console.log(this.dataUsers);
-    //   return;
-    // }
-    //
-    // console.log(this.dataUsers.value);
-
-    // this.userService.
-  }
-
-  // tslint:disable-next-line:typedef
-  return() {
-    if (confirm('You are about to quit this page')) {
-      this.router.navigate(['/listUsers']);
+    // tslint:disable-next-line:typedef
+    get Validations() {
+      return this.dataUsers.controls;
     }
-  }
+
+    Uploadefiler(event: any): any {
+        // tslint:disable-next-line:triple-equals
+        if (!event.target.files[0] || event.target.files[0].length == 0) {
+            this.msg = 'You must select an image';
+            console.log('You must select an image');
+            return;
+        }
+        this.selectedFile = event.target.files[0] ;
+
+        const mimeType = event.target.files[0].type;
+
+        if (mimeType.match(/image\/*/) == null) {
+            this.msg = 'Only images are supported';
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+
+        // tslint:disable-next-line:variable-name
+        reader.onload = (_event) => {
+            this.msg = '';
+            this.url = reader.result;
+        };
+    }
+
+    // tslint:disable-next-line:typedef
+    UpdatingUser() {
+        console.log(this.dataUsers.value);
+        this.submitted = true;
+        if (this.dataUsers.invalid) {
+          console.log("ERROR!");
+          this.errorSubmitted = true;
+          return;
+        }
+
+        const formValue = this.dataUsers.value ;
+        const formData = new FormData();
+
+        for (const key of Object.keys(formValue)) {
+            if (key !== 'photo') {
+              const value =  formValue[key] ;
+              // console.log(value);
+              formData.append(key, value) ;
+            }
+        }
+        if (this.selectedFile) {
+          formData.append('photo',  this.selectedFile) ;
+        }
+
+      //console.log(formValue);
+        this.userService.updateUser(this.idUserUpdated, formData).subscribe(data => {
+          alert("User updated");
+            this.router.navigate(['/listUsers']);
+        }, error => {
+            console.log(error);
+            this.errorSubmitted = true;
+        }) ;
+
+        this.submitted = true;
+    }
+
+    // tslint:disable-next-line:typedef
+    return() {
+        if (confirm('You are about to quit this page')) {
+            this.router.navigate(['/listUsers']);
+        }
+    }
 }

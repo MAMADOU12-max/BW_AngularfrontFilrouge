@@ -123,10 +123,8 @@
 
 .navbar li ul.dropdown-menu a:active { background: rgba(0,0,0, .1); }
 
-/*.navbar li ul.dropdown-menu a:first-child:hover { border-radius: 0; }*/
+.navbar li a:hover { background: #19B3D3; border-radius: 5px; }
 
-/*.navbar li:hover .arrow-down { border-top: 5px solid #fff; }*/
-
-.navbar li:hover { background: #19B3D3;border: 30px;  }
-.navbar li a:hover { background: #19B3D3; }
-
+.dropdown-menu a:hover{
+  background-color: #19B3D3; border-radius: 5px;
+}

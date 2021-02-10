@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../Services/auth.service';
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {UserService} from "../../Services/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -11,18 +12,19 @@ import {UserService} from "../../Services/user.service";
 export class HeaderComponent implements OnInit {
 
   token: any;
-  nameUserConnected: string;
-  imageUser: string;
+  idUserConnected: number | any;
+  nameUserConnected: string | any;
+  imageUser: string | any;
   photoExist = false;
   users: any;
   helper = new JwtHelperService() ;
 
-  constructor(private authService: AuthService, private userService: UserService) { }
+  constructor(private authService: AuthService, private userService: UserService,private router: Router) { }
 
   ngOnInit(): void {
   this.token = this.authService.getToken() ;
     const tokenDecoded = this.helper.decodeToken(this.token);
-    console.log(tokenDecoded.username);
+    // console.log(tokenDecoded.username);
     this.nameUserConnected = tokenDecoded.username;
 
     this.userService.getAllUserfromdb().subscribe(data => {
@@ -30,7 +32,7 @@ export class HeaderComponent implements OnInit {
         this.users.forEach((element: any) => {
             // console.log(element);
             if (element.username == this.nameUserConnected) {
-              // console.log(element);
+               this.idUserConnected = element.id;
               if (element.photo != null) {
                  this.imageUser = element.photo;
                  this.photoExist = true;
@@ -46,9 +48,10 @@ export class HeaderComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   logout() {
-    if (confirm('Are you sure you want logout?')) {
-      const token = localStorage.getItem('token') ;
-      localStorage.clear();
+    if (window.confirm('Are you sure you want logout?')) {
+        const token = localStorage.getItem('token') ;
+        this.router.navigate(['/login']);
+        localStorage.clear();
     }
   }
 }

@@ -7,6 +7,9 @@
         <div class="col-12 ">
             <span class="d-flex justify-content-start text-white mt-4" (click)="return()"><i class="fa fa-arrow-circle-left fa-3x return"></i></span>
             <h1>Edit User</h1>
+            <div class="alert alert-danger" *ngIf="errorSubmitted">
+              <strong>Alert!</strong> Error!
+            </div>
             <form (ngSubmit)="UpdatingUser()" [formGroup]="dataUsers">
                 <div class="form-row" >
                       <div class="form-group col-md-6">
@@ -50,13 +53,13 @@
                 </div>
                 <div class="form-row">
                       <div class="form-group col-md-6">
-                          <label for="inputPassword4" class="form-label text-white font-weight-bold">New Password</label>
-                          <input type="password" class="form-control" id="inputPassword6" placeholder="password" name="password"
-                                  [(ngModel)]="password" formControlName="password">
-                          <span *ngIf=" submitted || Validations.password.touched && Validations.password.errors" class="error">
-                              <span *ngIf="Validations.password.errors.required">password is required</span>
-                              <span *ngIf="Validations.password.errors.minlength">Password must be at least 6 characters</span>
-                          </span>
+                        <label for="inputPassword4" class="form-label text-white font-weight-bold">Password</label>
+                        <input type="password" class="form-control" id="inputPassword6" placeholder="password" name="password"
+                               formControlName="password" [(ngModel)]="password">
+                        <span *ngIf="submitted || Validations.password.touched && Validations.password.errors" class="error">
+                            <span *ngIf="Validations.password.errors.required">password is required</span>
+                            <span *ngIf="Validations.password.errors.minlength">Password must be at least 6 characters</span>
+                        </span>
                       </div>
                       <div class="form-group col-md-6">
                           <label for="inputPassword4" class="form-label text-white font-weight-bold">Confirmation your new password</label>

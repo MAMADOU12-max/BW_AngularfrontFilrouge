@@ -3,13 +3,18 @@
 
 <div class="container offset-lg-3">
 
+  <div class="col-10 text-center" *ngIf="profilSortieExist">
+      <div class="alert alert-danger" >
+          <strong>Alert!</strong> This profil already exist, please choose another!
+      </div>
+  </div>
   <div class="row">
       <div class="d-flex justify-content-between col-10 d-inline-block">
           <h3 class="text-center p-2 font-weight-bold">Listes des Profils de sortie</h3>
           <div class="d-flex">
               <input type="text" placeholder="search" name="search" class="form-control mt-1 mr-2" [(ngModel)]="search" (ngModelChange)="ToSearch()">
               <form action="" class="d-flex" #addProfSortie="ngForm" >
-                  <input type="text" placeholder="nouveau profil de sortie" ngModel name="libelle" class="form-control mt-1" required="">
+                  <input type="text" placeholder="nouveau profil de sortie" ngModel name="libelle" class="form-control mt-1 " required="">
                   <button class="btn btn-dark mt-1" style="height: 39px" (click)="AddProfSortie(addProfSortie)">Add</button>
               </form>
           </div>
@@ -30,7 +35,7 @@
           <tr *ngFor="let ps of profilSorties | paginate: { id: 'profilsortie',
                                                       itemsPerPage: 5,
                                                       currentPage: page,
-                                                      totalItems: totalProfilsSortie }">
+                                                      totalItems: totalProfilsSortie } | orderBy: key: reverse">
             <td class="align-items-center text-center">
                 <div *ngIf="!ps.isEdit">
                     {{ps.libelle}}

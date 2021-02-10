@@ -17,6 +17,10 @@ export class ListProfilsComponent implements OnInit {
   libelle = '';
   formGroup: FormGroup | any;
   isEdit: boolean | undefined;
+  profilExist = false;
+  //Pagination
+  key: string = 'libelle';
+  reverse: boolean = false;
 
   constructor(private profilService: ProfilService, private formBuilder: FormBuilder) { }
 
@@ -40,6 +44,8 @@ export class ListProfilsComponent implements OnInit {
     this.profilService.postProfil(this.libelle).subscribe(data => {
       alert('profil added with success');
       this.libelle = '';
+    },error => {
+      this.profilExist = true;
     });
   }
 

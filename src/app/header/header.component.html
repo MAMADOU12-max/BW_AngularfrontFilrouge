@@ -78,10 +78,10 @@
                 <img src="assets/img/avatar1.png" class="rounded-circle" alt="profil" style="height: 40px;width: 40px">
             </a>
             <div class="dropdown-menu">
-                <a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
-                <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+                <a class="dropdown-item" routerLink="/listUsers/{{idUserConnected}}/detail"><i class="fa fa-user-o"></i> Profile</a>
+                <a class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
                 <div class="divider dropdown-divider"></div>
-                <a href="#" class="dropdown-item" (click)="logout()">Logout</a>
+                <a class="dropdown-item" (click)="logout()">Logout</a>
             </div>
         </div>
     </div>

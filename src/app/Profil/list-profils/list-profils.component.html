@@ -11,6 +11,9 @@
     <div class="row">
         <div class="col-lg-6 col-md-12 col-sm-12 col-12 offset-lg-1 offset-0">
             <div class="col-lg-12 mt-2 mb-2 rounded-3">
+                <div class="alert alert-danger" *ngIf="profilExist">
+                    <strong>Alert!</strong> This profil already exist, please choose another!
+                </div>
                 <form action="" class="d-flex" [formGroup]="formGroup" (ngSubmit)="addingProfil()">
                     <input type="text" placeholder="new profil" formControlName="libelle"  name="libelle" class="form-control mt-1" required [(ngModel)]="libelle">
                     <button class="btn btn-dark mt-1" style="height: 39px" >Add New Profil</button>
@@ -27,7 +30,7 @@
                       <tr *ngFor="let profil of profils | paginate: { id: 'profil',
                                                           itemsPerPage: 5,
                                                           currentPage: page,
-                                                          totalItems: totalProfils }">
+                                                          totalItems: totalProfils } | orderBy: key: reverse">
                           <td class="align-items-center text-center">
                               <div *ngIf="!profil.isEdit">
                                   {{profil.libelle}}

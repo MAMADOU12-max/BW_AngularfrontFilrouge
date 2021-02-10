@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CutStringPipe implements PipeTransform {
 
-  transform(value: string): unknown {
+  transform(value: string | any): unknown {
      return value[0].substr(5) ;
   }
 

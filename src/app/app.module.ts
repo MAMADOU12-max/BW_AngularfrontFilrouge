@@ -44,6 +44,7 @@ import {QRCodeModule} from 'angularx-qrcode';
 import {SummarizePipe} from '../Pipes/summarize.pipe';
 import { DetailGrpeCompetenceComponent } from './Groupe_de_Competence/detail-grpe-competence/detail-grpe-competence.component';
 import {CutStringPipe} from "../Pipes/cut-string.pipe";
+import {Ng2OrderModule} from "ng2-order-pipe";
 
 
 @NgModule({
@@ -84,7 +85,7 @@ import {CutStringPipe} from "../Pipes/cut-string.pipe";
     TelephonePipe,
     SummarizePipe,
     DetailGrpeCompetenceComponent,
-    CutStringPipe
+    CutStringPipe,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +94,8 @@ import {CutStringPipe} from "../Pipes/cut-string.pipe";
     ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,
-    QRCodeModule
+    QRCodeModule,
+    Ng2OrderModule
   ],
   providers: [
     {

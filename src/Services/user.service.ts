@@ -10,60 +10,60 @@ import {map, tap} from 'rxjs/operators';
 })
 export class UserService {
 
-  private urlEnv = environment.Url_base ;
+    private urlEnv = environment.Url_base ;
 
-  // tslint:disable-next-line:variable-name
-  private _refresNeeded$ = new Subject<void>() ;
+    // tslint:disable-next-line:variable-name
+    private _refresNeeded$ = new Subject<void>() ;
 
-  // tslint:disable-next-line:typedef
-  get refresNeeded$() {
-    return this._refresNeeded$ ;
-  }
+    // tslint:disable-next-line:typedef
+    get refresNeeded$() {
+        return this._refresNeeded$ ;
+    }
 
-  constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient) { }
 
-  // tslint:disable-next-line:typedef
-  getAllUserfromdb() {
-      return this.httpClient.get(this.urlEnv + '/admin/users?Archivage=0');
-  }
+    // tslint:disable-next-line:typedef
+    getAllUserfromdb() {
+        return this.httpClient.get(this.urlEnv + '/admin/users?Archivage=0');
+    }
 
-  // tslint:disable-next-line:typedef
-  postUseronBack(user: FormData) {
-    // @ts-ignore
-    return this.httpClient.post(this.urlEnv + '/admin/users', user)
-      .pipe(
-        map( data => {
-          console.log(data);
-        }),
-        tap(() => {
-          this._refresNeeded$.next();
-        })
-      );
-  }
+    // tslint:disable-next-line:typedef
+    postUseronBack(user: FormData) {
+        // @ts-ignore
+        return this.httpClient.post(this.urlEnv + '/admin/users', user)
+          .pipe(
+              map( data => {
+                  console.log(data);
+              }),
+              tap(() => {
+                  this._refresNeeded$.next();
+              })
+          );
+    }
 
-  // tslint:disable-next-line:typedef
-  getUserByIdfromdb(id: number) {
-      return this.httpClient.get(this.urlEnv + '/admin/users/' + id).pipe(
-        tap(() => {
-          this._refresNeeded$.next();
-        })
-      );;
-  }
-  // tslint:disable-next-line:typedef
-  deletUserfromdb(id: number) {
-    return this.httpClient.delete(this.urlEnv + '/admin/users/' + id).pipe(
-      tap(() => {
-        this._refresNeeded$.next();
-      })
-    );
-  }
-  // tslint:disable-next-line:typedef
-   updateUser(id: number, user: any) {
-    // @ts-ignore
-    return this.httpClient.post(this.urlEnv + '/admin/users/' + id, user).pipe(
-      tap(() => {
-        this._refresNeeded$.next();
-      })
-    );
-  }
+    // tslint:disable-next-line:typedef
+    getUserByIdfromdb(id: number) {
+        return this.httpClient.get(this.urlEnv + '/admin/users/' + id).pipe(
+            tap(() => {
+                this._refresNeeded$.next();
+            })
+        );;
+    }
+    // tslint:disable-next-line:typedef
+    deletUserfromdb(id: number) {
+        return this.httpClient.delete(this.urlEnv + '/admin/users/' + id).pipe(
+            tap(() => {
+                this._refresNeeded$.next();
+            })
+        );
+    }
+     // tslint:disable-next-line:typedef
+     updateUser(id: number, user: FormData) {
+        // @ts-ignore
+        return this.httpClient.put(this.urlEnv + '/admin/users/' + id, user).pipe(
+            tap(() => {
+                this._refresNeeded$.next();
+            })
+        );
+    }
 }

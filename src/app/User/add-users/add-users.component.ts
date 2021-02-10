@@ -15,6 +15,7 @@ export class AddUsersComponent implements OnInit {
 
   formUser: FormGroup | any;
   submitted = false;
+  errorSubmitted = false;
   selectedFile: any ;
   url: any;
   msg = '';
@@ -79,11 +80,13 @@ export class AddUsersComponent implements OnInit {
   addUser() {
     this.submitted = true;
     if (this.formUser.invalid) {
+      console.log("ERROR!");
+      this.errorSubmitted = true;
       return;
     }
 
     const formValue = this.formUser.value ;
-    // console.log(formValue);
+    // console.log(formValue);return;
     const formData = new FormData();
     // console.log(formValue);
     // formData.append('firtname', this.formUser.value.firtname);
@@ -107,15 +110,13 @@ export class AddUsersComponent implements OnInit {
           this.router.navigate(['listUsers']);
           alert('user added with success!');
     }, error => {
-      console.log(error);
+      this.errorSubmitted = true;
     }) ;
   }
 
   // tslint:disable-next-line:typedef
   return() {
-    if (confirm('You are about to quit this page')) {
        this.router.navigate(['/listUsers']);
-    }
   }
 
 }

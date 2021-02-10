@@ -20,7 +20,7 @@
       <thead class="bg-dark">
       <tr>
         <th scope="col" class="text-white">Avatar</th>
-        <th scope="col" class="text-white">Username</th>
+        <th scope="col" class="text-white">Username &nbsp; <i class="fa fa-sort"></i></th>
 <!--        <th scope="col" class="text-white">Lastname</th>-->
         <th scope="col" class="text-white">Email</th>
         <th scope="col" class="text-white">Profil</th>
@@ -31,7 +31,7 @@
         <tr *ngFor="let user of users | paginate: { id: 'foo',
                                                       itemsPerPage: 5,
                                                       currentPage: page,
-                                                      totalItems: totalUsers }">
+                                                      totalItems: totalUsers } | orderBy: key: reverse" >
           <td scope="row">
               <span *ngIf="user.photo">
                  <img src="data:image/jpeg;base64,{{user.photo }}" class="img-thumbnail"  alt="" style="height: 60px;width: 60px">
@@ -47,9 +47,9 @@
 <!--                </div>-->
 <!--              </td>-->
 <!--            </ng-template>-->
-          <td  class="align-content-center">{{user?.username }}</td>
+          <td>{{user?.username }}</td>
 <!--          <td class="align-content-center">{{user.lastname}}</td>-->
-          <td >{{user?.email}}</td>
+          <td>{{user?.email | lowercase}}</td>
           <td>{{user?.roles | cutString}} </td>
           <td class="float-right ">
             <button class="btn btn-primary  badge-pill" style="width: 80px;" routerLink="/listUsers/{{user.id}}/detail">Details</button>

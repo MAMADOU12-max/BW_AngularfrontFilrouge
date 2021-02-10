@@ -11,8 +11,8 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 export class SidebarComponent implements OnInit {
 
   token: any;
-  nameUserConnected: string;
-  imageUser: string;
+  nameUserConnected: string | any;
+  imageUser: string | any;
   photoExist = false;
   users: any;
   helper = new JwtHelperService() ;
@@ -24,7 +24,7 @@ export class SidebarComponent implements OnInit {
 
     this.token = this.authService.getToken() ;
     const tokenDecoded = this.helper.decodeToken(this.token);
-    console.log(tokenDecoded.username);
+    // console.log(tokenDecoded.username);
     this.nameUserConnected = tokenDecoded.username;
 
     this.userService.getAllUserfromdb().subscribe(data => {

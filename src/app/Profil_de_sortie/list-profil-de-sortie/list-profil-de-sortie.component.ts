@@ -16,6 +16,10 @@ export class ListProfilDeSortieComponent implements OnInit {
   profilSorties: any = [] ;
   search ='';
   profilSearched: any;
+  profilSortieExist = false;
+  //Pagination
+  key: string = 'libelle';
+  reverse: boolean = false;
 
   constructor(private profildeSortieService: ProfilDeSortieService) { }
 
@@ -54,6 +58,8 @@ export class ListProfilDeSortieComponent implements OnInit {
     this.profildeSortieService.postprofildeSortieondb(libelleps.value).subscribe(libelle => {
         alert('profil added');
         libelleps.reset(''); // reset value way2
+    }, error => {
+        this.profilSortieExist = true;
     });
   }
 

@@ -32,7 +32,6 @@ import { ItemReferentielComponent } from './Referentiel/list-referentiel/item-re
 import { ItemPromotionComponent } from './Promotion/list-promotion/item-promotion/item-promotion.component';
 import { ItemProfildesortieComponent } from './Profil_de_sortie/list-profil-de-sortie/item-profildesortie/item-profildesortie.component';
 import { ItemGrpecompetenceComponent } from './Groupe_de_Competence/list-grpe-competence/item-grpecompetence/item-grpecompetence.component';
-import { ItemCompetenceComponent } from './Competence/list-competence/item-competence/item-competence.component';
 import { ErrorComponent } from './error/error.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -45,7 +44,9 @@ import {SummarizePipe} from '../Pipes/summarize.pipe';
 import { DetailGrpeCompetenceComponent } from './Groupe_de_Competence/detail-grpe-competence/detail-grpe-competence.component';
 import {CutStringPipe} from "../Pipes/cut-string.pipe";
 import {Ng2OrderModule} from "ng2-order-pipe";
-
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { SettingsComponent } from './settings/settings.component';
+import { ArchivingDataComponent } from './settings/archiving-data/archiving-data.component';
 
 @NgModule({
   declarations: [
@@ -79,13 +80,14 @@ import {Ng2OrderModule} from "ng2-order-pipe";
     ItemPromotionComponent,
     ItemProfildesortieComponent,
     ItemGrpecompetenceComponent,
-    ItemCompetenceComponent,
     ErrorComponent,
     DefaultimagePipe,
     TelephonePipe,
     SummarizePipe,
     DetailGrpeCompetenceComponent,
     CutStringPipe,
+    SettingsComponent,
+    ArchivingDataComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,7 +97,8 @@ import {Ng2OrderModule} from "ng2-order-pipe";
     FormsModule,
     NgxPaginationModule,
     QRCodeModule,
-    Ng2OrderModule
+    Ng2OrderModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [
     {

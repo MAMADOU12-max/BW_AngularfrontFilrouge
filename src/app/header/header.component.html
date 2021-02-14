@@ -77,9 +77,10 @@
             <a *ngIf="!photoExist" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action mt-2 ml-5">
                 <img src="assets/img/avatar1.png" class="rounded-circle" alt="profil" style="height: 40px;width: 40px">
             </a>
+            <h4>{{profilUserConnected | cutString}}</h4>
             <div class="dropdown-menu">
                 <a class="dropdown-item" routerLink="/listUsers/{{idUserConnected}}/detail"><i class="fa fa-user-o"></i> Profile</a>
-                <a class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+                <a class="dropdown-item" routerLink="/settings"><i class="fa fa-sliders"></i> Settings</a>
                 <div class="divider dropdown-divider"></div>
                 <a class="dropdown-item" (click)="logout()">Logout</a>
             </div>

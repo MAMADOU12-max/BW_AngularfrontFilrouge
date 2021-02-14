@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProfilService} from '../../../Services/profil.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -21,6 +22,7 @@ export class ListProfilsComponent implements OnInit {
   //Pagination
   key: string = 'libelle';
   reverse: boolean = false;
+  profilAddedWithSuccess: boolean = true;
 
   constructor(private profilService: ProfilService, private formBuilder: FormBuilder) { }
 
@@ -42,7 +44,11 @@ export class ListProfilsComponent implements OnInit {
   addingProfil() {
     // console.log(this.libelle);
     this.profilService.postProfil(this.libelle).subscribe(data => {
-      alert('profil added with success');
+      Swal.fire(
+        'Good!',
+        'profil added with success',
+        'success'
+      )
       this.libelle = '';
     },error => {
       this.profilExist = true;
@@ -53,10 +59,14 @@ export class ListProfilsComponent implements OnInit {
   // tslint:disable-next-line:typedef
    deletingprofil(id: number) {
       if (confirm('Are you sure')) {
-        // console.log(id);
-        this.profilService.deleteProfil(id).subscribe(data => {
-          alert('profil deleted with success');
-        });
+          // console.log(id);
+          this.profilService.deleteProfil(id).subscribe(data => {
+              Swal.fire(
+                'Good!',
+                'Profil deleted with success!',
+                'success'
+              )
+          });
       }
   }
 
@@ -85,10 +95,14 @@ export class ListProfilsComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   editingProfil(data: any) {
-    this.profilService.editProfil(data.id, data.libelle).subscribe( edited => {
-          alert('profil updated') ;
-          data.libelle = ''; // reset value way1
-      }) ;
+      this.profilService.editProfil(data.id, data.libelle).subscribe( edited => {
+          Swal.fire(
+            'Good!',
+            'profil updated!',
+            'success'
+          )
+            data.libelle = ''; // reset value way1
+        }) ;
   }
 }
 

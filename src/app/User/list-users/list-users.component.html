@@ -28,10 +28,10 @@
       </tr>
       </thead>
       <tbody >
-        <tr *ngFor="let user of users | paginate: { id: 'foo',
+        <tr *ngFor="let user of users | orderBy: key: reverse | paginate: { id: 'foo',
                                                       itemsPerPage: 5,
                                                       currentPage: page,
-                                                      totalItems: totalUsers } | orderBy: key: reverse" >
+                                                      totalItems: totalUsers }" >
           <td scope="row">
               <span *ngIf="user.photo">
                  <img src="data:image/jpeg;base64,{{user.photo }}" class="img-thumbnail"  alt="" style="height: 60px;width: 60px">
@@ -47,7 +47,7 @@
 <!--                </div>-->
 <!--              </td>-->
 <!--            </ng-template>-->
-          <td>{{user?.username }}</td>
+          <td>{{user?.username | titlecase}}</td>
 <!--          <td class="align-content-center">{{user.lastname}}</td>-->
           <td>{{user?.email | lowercase}}</td>
           <td>{{user?.roles | cutString}} </td>

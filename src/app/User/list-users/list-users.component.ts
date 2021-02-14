@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../Services/user.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-list-users',
@@ -59,11 +60,30 @@ export class ListUsersComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   deleteUser(id: number) {
-    if (confirm('Are you sure that you remove this user?')) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Are you sure that you remove this user?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.isConfirmed) {
         this.userService.deletUserfromdb(id).subscribe(data => {
-          alert('user removed with success');
+          Swal.fire(
+            'Deleted!',
+            'User has been deleted.',
+            'success'
+          )
         });
-    }
+      }
+    })
+    // if (confirm('Are you sure that you remove this user?')) {
+    //     this.userService.deletUserfromdb(id).subscribe(data => {
+    //       alert('user removed with success');
+    //     });
+    // }
   }
 
 

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {GroupeCompetenceService} from '../../../Services/groupe-competence.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CompetencesService} from "../../../Services/competences.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-add-competence',
@@ -14,18 +16,21 @@ export class AddCompetenceComponent implements OnInit {
   selectedOption: any;
   postedcompetence: FormGroup | any;
   nomCompetence: string | any;
-  niveau1: string | any;
-  niveau2: string | any;
-  niveau3: string | any;
-  // groupedAction: string | any;
-  groupedAction1: string | any;
-  groupedAction2: string | any;
-  groupedAction3: string | any;
-  critereDevaluation1: string | any;
-  critereDevaluation2: string | any;
-  critereDevaluation3: string | any;
+  libelle: string | any;
+  groupedAction: string | any;
+  criteredEvaluation: string | any;
+  niveau1: FormGroup | any;
+  niveau2: FormGroup | any;
+  niveau3: FormGroup | any;
+  niveaux = new FormArray([]);
+  niveauxTabValue: string[] = [];
 
-  constructor(private router: Router, private grpCompetenceService: GroupeCompetenceService, private formBuilder: FormBuilder) {
+  //error
+ libelleError: boolean =false;
+ descriptionError: boolean = false;
+
+  constructor(private router: Router, private grpCompetenceService: GroupeCompetenceService,
+              private formBuilder: FormBuilder, private competenceService: CompetencesService) {
     this.selectedOption = 'selectDefault';
   }
 
@@ -36,30 +41,70 @@ export class AddCompetenceComponent implements OnInit {
       });
 
       this.postedcompetence = this.formBuilder.group({
-        nomCompetence: ['', [Validators.required]],
-        groupedAction1: ['', [Validators.required]],
-        groupedAction2: ['', [Validators.required]],
-        groupedAction3: ['', [Validators.required]],
-        critereDevaluation1: ['', [Validators.required]],
-        critereDevaluation2: ['', [Validators.required]],
-        critereDevaluation3: ['', [Validators.required]]
+          nomCompetence: ['', [Validators.required]],
+          libelle: ['', [Validators.required]],
+          niveaux: new FormArray([], Validators.required)
       });
+
+      this.niveau1 = this.formBuilder.group({
+          level: ['Niveau1', [Validators.required]],
+          groupedAction : ['', [Validators.required]],
+          criteredEvaluation: ['', [Validators.required]]
+      });
+      this.niveau2 = this.formBuilder.group({
+          level: ['Niveau2', [Validators.required]],
+          groupedAction: ['', [Validators.required]],
+          criteredEvaluation: ['', [Validators.required]],
+      });
+      this.niveau3 = this.formBuilder.group({
+          level: ['Niveau3', [Validators.required]],
+          groupedAction: ['', [Validators.required]],
+          criteredEvaluation: ['', [Validators.required]],
+      });
+      this.NiveauxControls.controls.push(this.niveau1)
+      this.NiveauxControls.controls.push(this.niveau2)
+      this.NiveauxControls.controls.push(this.niveau3)
+    // console.log(this.NiveauxControls);
   }
 
+  // get Architecture different niveau
+  get NiveauxControls(){
+      return (this.postedcompetence.get('niveaux') as FormArray);
+  }
+  //get VAlue
+  get NiveauValue(){
+      return this.postedcompetence.controls.niveaux;
+  }
   // tslint:disable-next-line:typedef
   addCompetence() {
-    // this.groupedAction = this.groupedAction1;
-    // this.groupedAction = this.groupedAction2;
-    // this.groupedAction = this.groupedAction3;
-    // console.log(this.libelleCompetence);
-    // console.log(this.groupedAction);
-
-    console.log(this.postedcompetence.value);
-    // console.log(this.groupedAction2);
-    // console.log(this.groupedAction3);
-    // console.log(this.critereDevaluation1);
-    // console.log(this.critereDevaluation2);
-    // console.log(this.critereDevaluation3);
+      if (this.postedcompetence.controls.nomCompetence.invalid) {
+          this.libelleError = true;
+          return;
+      } else if(this.postedcompetence.controls.libelle.invalid) {
+          this.descriptionError = true;
+          return;
+      }
+     if (this.niveau1.invalid || this.niveau2.invalid || this.niveau3.invalid) {
+          Swal.fire(
+            'Good!',
+            'You must fill in all the fields of the 3 levels!',
+            'error'
+          )
+          return;
+      }
+      this.niveauxTabValue.push(this.niveau1.value);
+      this.niveauxTabValue.push(this.niveau2.value);
+      this.niveauxTabValue.push(this.niveau3.value);
+      this.NiveauValue.setValue(this.niveauxTabValue);
+      // console.log(this.niveau1.value);
+      //  console.log(this.postedcompetence.value);
+    this.competenceService.addCompetenceOndb(this.postedcompetence.value).subscribe(data =>{
+        Swal.fire(
+          'Good!',
+          'Competence added with success!',
+          'success'
+        )
+    });
   }
 
   // // tslint:disable-next-line:typedef
@@ -70,8 +115,8 @@ export class AddCompetenceComponent implements OnInit {
   // }
   // tslint:disable-next-line:typedef
   return() {
-    if (confirm('You are about to quit this page')) {
+    //if (confirm('You are about to quit this page')) {
       this.router.navigate(['/listCompetence']);
-    }
+  //  }
   }
 }

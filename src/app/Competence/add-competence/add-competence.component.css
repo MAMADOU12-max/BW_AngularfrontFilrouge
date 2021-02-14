@@ -18,4 +18,6 @@
 .return:hover {
   color: #0B87A6;
 }
-
+.error {
+  color: #FA8973;
+}

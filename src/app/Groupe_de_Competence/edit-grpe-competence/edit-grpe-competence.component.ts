@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CompetencesService} from '../../../Services/competences.service';
 import {GroupeCompetenceService} from '../../../Services/groupe-competence.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-edit-grpe-competence',
@@ -65,13 +66,16 @@ export class EditGrpeCompetenceComponent implements OnInit {
 
     this.grpeCompetenceService.editGrpeCompetenceOndb(this.idGrpeCompetenceUrl, this.grpeComptence.value).subscribe(data => {
             this.router.navigate(['/listGrpeCompetence']);
+            Swal.fire(
+              'Good!',
+              'Updated with success!',
+              'success'
+            )
      });
   }
 
   // tslint:disable-next-line:typedef
   return() {
-    if (confirm('You are about to quit this page')) {
       this.router.navigate(['/listGrpeCompetence']);
-    }
   }
 }

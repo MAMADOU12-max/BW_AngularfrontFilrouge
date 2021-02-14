@@ -2,7 +2,7 @@
 <app-sidebar></app-sidebar>
 
 <div class="container">
-
+<!--  Swith alert -->
     <div class="d-flex justify-content-between col-md-6 offset-1 d-inline-block">
 <!--        <h2 class="text-center p-2 font-weight-bold">Liste Profils</h2>-->
 <!--        <a  class="text-right p-2 font-weight-bold" routerLink="/listProfil/add"><i class="fa fa-user-plus fa-3x"></i></a>-->
@@ -27,10 +27,10 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr *ngFor="let profil of profils | paginate: { id: 'profil',
+                      <tr *ngFor="let profil of profils  | orderBy: key: reverse | paginate: { id: 'profil',
                                                           itemsPerPage: 5,
                                                           currentPage: page,
-                                                          totalItems: totalProfils } | orderBy: key: reverse">
+                                                          totalItems: totalProfils }">
                           <td class="align-items-center text-center">
                               <div *ngIf="!profil.isEdit">
                                   {{profil.libelle}}

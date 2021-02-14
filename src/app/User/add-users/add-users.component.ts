@@ -4,6 +4,7 @@ import {UserService} from '../../../Services/user.service';
 import {UserModal} from '../../../Modal/UserModal';
 import { MustMatch } from   '../../../Validator/ConfirmedValidator';
 import {Router} from '@angular/router';
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -32,22 +33,22 @@ export class AddUsersComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this.formUser = this.formBuilder.group({
-      firtname: ['', [Validators.required, Validators.minLength(3)]],
-      lastname: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(5)]],
-      confirmPassword: ['', [Validators.required]],
-      profils: ['', [Validators.required]],
-      username: ['', [Validators.required, Validators.minLength(4)]],
-    }, {
-      validator: MustMatch('password', 'confirmPassword')
-    }) ;
+      this.formUser = this.formBuilder.group({
+          firtname: ['', [Validators.required, Validators.minLength(3)]],
+          lastname: ['', [Validators.required, Validators.minLength(2)]],
+          email: ['', [Validators.required, Validators.email]],
+          password: ['', [Validators.required, Validators.minLength(5)]],
+          confirmPassword: ['', [Validators.required]],
+          profils: ['', [Validators.required]],
+          username: ['', [Validators.required, Validators.minLength(4)]],
+      }, {
+          validator: MustMatch('password', 'confirmPassword')
+      }) ;
   }
 
   // tslint:disable-next-line:typedef
   get Validations() {
-    return this.formUser.controls;
+      return this.formUser.controls;
   }
 
   Uploadefiler(event: any): any {
@@ -78,40 +79,45 @@ export class AddUsersComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   addUser() {
-    this.submitted = true;
-    if (this.formUser.invalid) {
-      console.log("ERROR!");
-      this.errorSubmitted = true;
-      return;
-    }
+      this.submitted = true;
+      if (this.formUser.invalid) {
+        console.log("ERROR!");
+        this.errorSubmitted = true;
+        return;
+      }
 
-    const formValue = this.formUser.value ;
-    // console.log(formValue);return;
-    const formData = new FormData();
-    // console.log(formValue);
-    // formData.append('firtname', this.formUser.value.firtname);
-    // formData.append('lastname', this.formUser.value.lastname);
-    // formData.append('email', this.formUser.value.email);
-    // formData.append('password', this.formUser.value.password);
-    // formData.append('username', this.formUser.value.username);
-    // formData.append('profils', this.formUser.value.profils);
-    for (const key of Object.keys(formValue)) {
-      if (key !== 'photo') {
-          const value =  formValue[key] ;
-          // console.log(value);
-          formData.append(key, value) ;
-        }
-        // console.log(formData) ;
-    }
-    if (this.selectedFile) {
-        formData.append('photo',  this.selectedFile) ;
-    }
-    this.userService.postUseronBack(formData).subscribe( data => {
-          this.router.navigate(['listUsers']);
-          alert('user added with success!');
-    }, error => {
-      this.errorSubmitted = true;
-    }) ;
+      const formValue = this.formUser.value ;
+      // console.log(formValue);return;
+      const formData = new FormData();
+      // console.log(formValue);
+      // formData.append('firtname', this.formUser.value.firtname);
+      // formData.append('lastname', this.formUser.value.lastname);
+      // formData.append('email', this.formUser.value.email);
+      // formData.append('password', this.formUser.value.password);
+      // formData.append('username', this.formUser.value.username);
+      // formData.append('profils', this.formUser.value.profils);
+      for (const key of Object.keys(formValue)) {
+        if (key !== 'photo') {
+            const value =  formValue[key] ;
+            // console.log(value);
+            formData.append(key, value) ;
+          }
+          // console.log(formData) ;
+      }
+      if (this.selectedFile) {
+          formData.append('photo',  this.selectedFile) ;
+      }
+      this.userService.postUseronBack(formData).subscribe( data => {
+          Swal.fire(
+            'Good!',
+            'user added with success!',
+            'success'
+          )
+            this.router.navigate(['listUsers']);
+
+      }, error => {
+         this.errorSubmitted = true;
+      }) ;
   }
 
   // tslint:disable-next-line:typedef

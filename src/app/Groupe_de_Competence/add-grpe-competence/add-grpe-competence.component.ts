@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {CompetencesService} from '../../../Services/competences.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GroupeCompetenceService} from '../../../Services/groupe-competence.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-add-grpe-competence',
@@ -50,22 +51,22 @@ export class AddGrpeCompetenceComponent implements OnInit {
     if (this.grpeComptence.invalid) {
       return;
     }
-    // tslint:disable-next-line:no-unused-expression
-    // this.grpeComptence.value;
-    console.log(this.grpeComptence.value);
+    // console.log(this.grpeComptence.value);
     this.grpeCompetenceService.postGrpeCompetenceOndb(this.grpeComptence.value).subscribe(data => {
-      alert('groupe de compétence ajouté avec succés');
-      this.router.navigate(['/listGrpeCompetence']);
+        Swal.fire(
+          'Good!',
+          'groupe de compétence ajouté avec succés',
+          'success'
+        )
+        this.router.navigate(['/listGrpeCompetence']);
     }, error => {
-      this.uniklibelleBoolean = true;
+        this.uniklibelleBoolean = true;
     });
 
   }
 
   // tslint:disable-next-line:typedef
   return() {
-    if (confirm('You are about to quit this page')) {
       this.router.navigate(['/listGrpeCompetence']);
-    }
   }
 }

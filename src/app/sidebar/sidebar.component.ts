@@ -12,6 +12,8 @@ export class SidebarComponent implements OnInit {
 
   token: any;
   nameUserConnected: string | any;
+  idUserConnected: number | any;
+  userConnected: any;
   imageUser: string | any;
   photoExist = false;
   users: any;
@@ -24,26 +26,18 @@ export class SidebarComponent implements OnInit {
 
     this.token = this.authService.getToken() ;
     const tokenDecoded = this.helper.decodeToken(this.token);
-    // console.log(tokenDecoded.username);
-    this.nameUserConnected = tokenDecoded.username;
+    this.idUserConnected = tokenDecoded.id;
 
-    this.userService.getAllUserfromdb().subscribe(data => {
-      this.users = data;
-      this.users.forEach((element: any) => {
-        // console.log(element);
-        if (element.username == this.nameUserConnected) {
-          // console.log(element);
-          if (element.photo != null) {
-            this.imageUser = element.photo;
-            this.photoExist = true;
-            // console.log(this.imageUser);
-            return;
-          }
-          return;
-        }
-      }) ;
+    this.userService.getUserByIdfromdb(this.idUserConnected).subscribe(data => {
+      this.userConnected = data;
+      // console.log(this.userConnected);
+      if (this.userConnected.photo != null) {
+        this.imageUser = this.userConnected.photo;
+        this.photoExist = true;
+      }
+      this.nameUserConnected = this.userConnected.username;
+
     });
-    // const tokenDecoded = this.helper.decodeToken(response.token) ;
   }
 
   // tslint:disable-next-line:typedef

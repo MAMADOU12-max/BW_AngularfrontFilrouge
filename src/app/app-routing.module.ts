@@ -26,35 +26,40 @@ import {DetailProfilComponent} from './Profil/detail-profil/detail-profil.compon
 import {UnSavedChangesGuard} from '../Guards/un-saved-changes.guard';
 import {UnSavedAddGrpeCompetenceGuard} from '../Guards/un-saved-add-grpe-competence.guard';
 import {DetailGrpeCompetenceComponent} from './Groupe_de_Competence/detail-grpe-competence/detail-grpe-competence.component';
+import {AuthGuardServiceGuard} from "../Guards/auth-guard-service.guard";
+import {SettingsComponent} from "./settings/settings.component";
+import {EditCompetenceComponent} from "./Competence/edit-competence/edit-competence.component";
 
 const routes: Routes = [
-  LoginRoute,
-  {path: '', redirectTo: 'login', pathMatch: 'full'} ,
-  {path: 'login', component: LoginComponent},
-  {path: 'listUsers', component: ListUsersComponent},
-      {path: 'listUsers/:id/detail', component: DetailUserComponent},
-  {path: 'addUser', component: AddUsersComponent, canDeactivate: [UnSavedChangesGuard]},
-  {path: 'editUser/:id', component: EditUserComponent},
-  {path: 'listProfil', component: ListProfilsComponent, children: [
-      {path: ':id/edit', component: EditProfilComponent},
-      {path: ':value/:id', component: DetailProfilComponent}
-    ]},
-  {path: 'listprofildeSortie', component: ListProfilDeSortieComponent},
-  {path: 'addprofildeSortie', component: AddProfilDeSortieComponent},
-  {path: 'listGrpeCompetence', component: ListGrpeCompetenceComponent},
-  {path: 'addGrpeCompetence', component: AddGrpeCompetenceComponent, canDeactivate: [UnSavedAddGrpeCompetenceGuard]},
-  {path: 'editGrpeCompetence/:id', component: EditGrpeCompetenceComponent},
-  {path: 'detailGrpeCompetence/:id', component: DetailGrpeCompetenceComponent},
-  {path: 'listCompetence', component: ListCompetenceComponent},
-  {path: 'addCompetence', component: AddCompetenceComponent},
-  {path: 'listReferentiel', component: ListReferentielComponent},
-  {path: 'addReferentiel', component: AddReferentielComponent},
-  {path: 'editReferentiel/:id', component: EditReferentielComponent},
-  {path: 'listPromotion', component: ListPromotionComponent},
-  {path: 'addPromotion', component: AddPromotionComponent},
-  {path: 'editPromotion', component: EditPromotionComponent} ,
-  {path: 'not-found', component: ErrorComponent} ,
-  {path: '**', redirectTo: '/not-found'}
+    LoginRoute,
+    {path: '', redirectTo: 'login', pathMatch: 'full'} ,
+    {path: 'login', component: LoginComponent},
+    {path: 'listUsers', canActivate: [AuthGuardServiceGuard], component: ListUsersComponent},
+        {path: 'listUsers/:id/detail', canActivate: [AuthGuardServiceGuard], component: DetailUserComponent},
+    {path: 'addUser', component: AddUsersComponent , canActivate: [AuthGuardServiceGuard], canDeactivate: [UnSavedChangesGuard]},
+    {path: 'editUser/:id' , canActivate: [AuthGuardServiceGuard], component: EditUserComponent},
+    {path: 'listProfil', canActivate: [AuthGuardServiceGuard], component: ListProfilsComponent, children: [
+        {path: ':id/edit',canActivate: [AuthGuardServiceGuard], component: EditProfilComponent},
+        {path: ':value/:id',canActivate: [AuthGuardServiceGuard], component: DetailProfilComponent}
+      ]},
+    {path: 'listprofildeSortie',canActivate: [AuthGuardServiceGuard], component: ListProfilDeSortieComponent},
+    {path: 'addprofildeSortie',canActivate: [AuthGuardServiceGuard], component: AddProfilDeSortieComponent},
+    {path: 'listGrpeCompetence',canActivate: [AuthGuardServiceGuard], component: ListGrpeCompetenceComponent},
+    {path: 'addGrpeCompetence',canActivate: [AuthGuardServiceGuard], component: AddGrpeCompetenceComponent, canDeactivate: [UnSavedAddGrpeCompetenceGuard]},
+    {path: 'editGrpeCompetence/:id',canActivate: [AuthGuardServiceGuard], component: EditGrpeCompetenceComponent},
+    {path: 'detailGrpeCompetence/:id', canActivate: [AuthGuardServiceGuard], component: DetailGrpeCompetenceComponent},
+    {path: 'listCompetence', canActivate: [AuthGuardServiceGuard], component: ListCompetenceComponent},
+    {path: 'addCompetence', canActivate: [AuthGuardServiceGuard], component: AddCompetenceComponent},
+    {path: 'editCompetence/:id',component: EditCompetenceComponent},
+    {path: 'listReferentiel', canActivate: [AuthGuardServiceGuard], component: ListReferentielComponent},
+    {path: 'addReferentiel', canActivate: [AuthGuardServiceGuard], component: AddReferentielComponent},
+    {path: 'editReferentiel/:id', canActivate: [AuthGuardServiceGuard], component: EditReferentielComponent},
+    {path: 'listPromotion', canActivate: [AuthGuardServiceGuard], component: ListPromotionComponent},
+    {path: 'addPromotion', canActivate: [AuthGuardServiceGuard], component: AddPromotionComponent},
+    {path: 'editPromotion', canActivate: [AuthGuardServiceGuard], component: EditPromotionComponent} ,
+    {path: 'settings', canActivate: [AuthGuardServiceGuard], component: SettingsComponent} ,
+    {path: 'not-found', component: ErrorComponent} ,
+    {path: '**', redirectTo: '/not-found'}
 ];
 
 @NgModule({

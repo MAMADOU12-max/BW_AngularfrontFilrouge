@@ -12,8 +12,9 @@ export class AuthService {
 
   private urlEnv = environment.Url_base ;
   roleuser =  '' ;
+  logginIn: boolean = false;
 
-  constructor(private httpClient: HttpClient, private router: Router) { }
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   helper = new JwtHelperService() ;
 
@@ -27,9 +28,9 @@ export class AuthService {
                 // console.log(this.tokenDecoded.roles[0]) ;
                localStorage.setItem('token', response.token) ;
                 // this.roleuser = this.tokenDecoded['roles'] ;
-               if (tokenDecoded.roles[0] === 'ROLE_ADMIN') {
-                // this.router.navigate(['/addUser']) ;
-                this.router.navigate(['/listProfil']);
+            this.logginIn = true;
+             if (tokenDecoded.roles[0] === 'ROLE_ADMIN') {
+               // this.router.navigate(['/listProfil']);
               }else if (tokenDecoded.roles[0] === 'ROLE_FORMATEUR') {
                   this.router.navigate(['addPromotion']) ;
               }else if (tokenDecoded.roles[0] === 'ROLE_CM') {
@@ -37,6 +38,18 @@ export class AuthService {
               }
           })
       ) ;
+  }
+
+  // function for guard
+  isAuthenticated() {
+    const promise = new Promise(
+      (resolve, reject) => {
+        setTimeout(() => {
+          resolve(this.logginIn) ;
+        },1000)
+      }
+    );
+    return promise;
   }
 
   // tslint:disable-next-line:typedef
@@ -51,6 +64,7 @@ export class AuthService {
   // tslint:disable-next-line:typedef
   logout() {
     const token = localStorage.getItem('token') ;
+    this.logginIn = false;
     return  localStorage.clear();
     return token;
   }

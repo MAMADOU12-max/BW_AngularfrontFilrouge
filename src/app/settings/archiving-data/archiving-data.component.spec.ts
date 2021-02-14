@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ItemCompetenceComponent } from './item-competence.component';
+import { ArchivingDataComponent } from './archiving-data.component';
 
-describe('ItemCompetenceComponent', () => {
-  let component: ItemCompetenceComponent;
-  let fixture: ComponentFixture<ItemCompetenceComponent>;
+describe('ArchivingDataComponent', () => {
+  let component: ArchivingDataComponent;
+  let fixture: ComponentFixture<ArchivingDataComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ItemCompetenceComponent ]
+      declarations: [ ArchivingDataComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ItemCompetenceComponent);
+    fixture = TestBed.createComponent(ArchivingDataComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

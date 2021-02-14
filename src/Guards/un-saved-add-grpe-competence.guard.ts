@@ -12,8 +12,8 @@ export class UnSavedAddGrpeCompetenceGuard implements CanDeactivate<AddGrpeCompe
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (component.grpeComptence.dirty) {
-      return window.confirm('You have some unsaved changes. Are you sure you want to navigate?');
+    if (component.grpeComptence.dirty && !component.submitted) {
+        return window.confirm('You have some unsaved changes. Are you sure you want to navigate?');
     }
     return true;
   }

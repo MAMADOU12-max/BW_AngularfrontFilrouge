@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {GroupeCompetenceService} from '../../../../Services/groupe-competence.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-item-grpecompetence',
@@ -18,12 +19,25 @@ export class ItemGrpecompetenceComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   deleteGrpecompetence(id: number) {
-    if (confirm('Are you sure you want delete this?')) {
-        // @ts-ignore
-      this.groupecompetenceService.deleteGrpecompetencefromdb(id).subscribe(data => {
-            alert('competence crew deleted!');
-        });
-    }
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "Are you sure you want delete this?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            this.groupecompetenceService.deleteGrpecompetencefromdb(id).subscribe(data => {
+                Swal.fire(
+                  'Good!',
+                  'competence crew deleted!',
+                  'success'
+                )
+            });
+        }
+      })
   }
 
 }

@@ -13,15 +13,22 @@
                                                           itemsPerPage: 4,
                                                           currentPage: page,
                                                           totalItems: totalprofils }" >
-            <td class="text-center justify-content-center font-weight-bold d-flex align-self-center m-4">{{user?.id}}</td>
+            <td class="text-center justify-content-center font-weight-bold d-flex align-self-center m-4">
+              <a routerLink="/listUsers/{{user?.id}}/detail">{{user?.id}}</a>
+            </td>
             <td></td>
-              <td class="text-center justify-content-center font-weight-bold d-flex align-self-center m-4" style="padding-top: 12px"><h5>{{user?.username}}</h5></td>
+              <td class="text-center justify-content-center font-weight-bold d-flex align-self-center m-4" style="padding-top: 12px">
+                <a routerLink="/listUsers/{{user?.id}}/detail" title="Go for this user"><h5>{{user?.username}}</h5></a> </td>
             <td scope="row">
                     <span *ngIf="user.photo">
-                       <img src="data:image/jpeg;base64,{{user.photo }}" class="img-thumbnail"  alt="" style="height: 60px;width: 60px">
+                          <a routerLink="/listUsers/{{user?.id}}/detail">
+                               <img src="data:image/jpeg;base64,{{user.photo }}" class="img-thumbnail"  alt="" style="height: 60px;width: 60px">
+                          </a>
                     </span>
                     <span *ngIf="!user.photo">
-                        <img src="assets/img/avatar1.png" class="img-thumbnail"  alt="" style="height: 60px;width: 60px">
+                          <a routerLink="/listUsers/{{user?.id}}/detail">
+                               <img src="assets/img/avatar1.png" class="img-thumbnail"  alt="" style="height: 60px;width: 60px">
+                          </a>
                     </span>
             </td>
         </tr>

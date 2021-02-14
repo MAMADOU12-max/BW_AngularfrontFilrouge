@@ -2,34 +2,62 @@ import { Injectable } from '@angular/core';
 import {environment} from '../environments/environment';
 import {Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {map, tap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompetencesService {
 
-  private urlEnv = environment.Url_base ;
+    private urlEnv = environment.Url_base ;
 
-  // tslint:disable-next-line:variable-name
-  private _refresNeeded$ = new Subject<void>() ;
+    // tslint:disable-next-line:variable-name
+    private _refresNeeded$ = new Subject<void>() ;
 
-  // tslint:disable-next-line:typedef
-  get refresNeeded$() {
-    return this._refresNeeded$ ;
-  }
+    // tslint:disable-next-line:typedef
+    get refresNeeded$() {
+      return this._refresNeeded$ ;
+    }
 
-  constructor(private  httpClient: HttpClient) { }
+    constructor(private  httpClient: HttpClient) { }
 
-  // tslint:disable-next-line:typedef
-  getCompetenceFromdb(){
-      return this.httpClient.get(this.urlEnv + '/admin/competences');
-  }
-  // tslint:disable-next-line:typedef
-  getCompetenceFromdbbyId(id: number) {
-    return this.httpClient.get(this.urlEnv + '/admin/competences/' + id);
-  }
-  // tslint:disable-next-line:typedef
-  addCompetenceFrombyId(competencePosted: any) {
-      return this.httpClient.post(this.urlEnv + '/admin/competences', competencePosted);
-  }
+    // tslint:disable-next-line:typedef
+    getCompetenceFromdb(){
+        return this.httpClient.get(this.urlEnv + '/admin/competences?Archivage=0');
+    }
+    // tslint:disable-next-line:typedef
+    getCompetenceFromdbbyId(id: number) {
+        return this.httpClient.get(this.urlEnv + '/admin/competences/' + id).pipe(
+            tap(() => {
+              this._refresNeeded$.next();
+            })
+        );
+    }
+    // tslint:disable-next-line:typedef
+    addCompetenceOndb(competencePosted: any) {
+        return this.httpClient.post(this.urlEnv + '/admin/competences', competencePosted).pipe(
+            map( data => {
+              //console.log(data);
+            }),
+            tap(() => {
+                this._refresNeeded$.next();
+            })
+        );
+    }
+
+    deleteCompetenceOndb(id: number) {
+        return this.httpClient.delete(this.urlEnv + '/admin/competences/' + id).pipe(
+            tap(() => {
+                this._refresNeeded$.next();
+            })
+        );
+    }
+
+    editCompetence(id: number, competence: any) {
+        return this.httpClient.put(this.urlEnv + '/admin/competences/' + id, competence).pipe(
+            tap(() =>{
+                this._refresNeeded$.next();
+            })
+        )
+    }
 }

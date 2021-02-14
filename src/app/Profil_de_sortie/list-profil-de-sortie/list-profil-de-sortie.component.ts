@@ -89,11 +89,12 @@ export class ListProfilDeSortieComponent implements OnInit {
     } else {
       // if research
       this.profildeSortieService.getAllprofilDeSortiefromdb().subscribe( data => {
-        this.profilSearched = data;
+            this.profilSearched = data;
 
-        this.profilSorties = Object.values(this.profilSearched).filter( (res: any) => {
-          return res.libelle.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
-        });
+            this.profilSorties = Object.values(this.profilSearched).filter( (res: any) => {
+            // console.log(res.libelle.toLocaleLowerCase().match(this.search.toLocaleLowerCase()));
+            return res.libelle.toLocaleLowerCase().match(this.search.toLocaleLowerCase());
+          });
       });
     }
   }

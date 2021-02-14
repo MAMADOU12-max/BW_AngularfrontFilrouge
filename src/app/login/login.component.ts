@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../Services/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {JwtHelperService} from "@auth0/angular-jwt";
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -11,11 +13,14 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  token: string | any;
+  tokenDecoded: string | any;
   username = '';
   password = '';
   loginForm: FormGroup | any;
   fakeAuth = false;
   submitted = false;
+  helper = new JwtHelperService() ;
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
@@ -36,8 +41,19 @@ export class LoginComponent implements OnInit {
          return ;
       }
       this.authService.Authentification(this.username, this.password).subscribe(data => {
-        this.router.navigate(['/listProfil']) ;
-        this.username = '';
+
+          this.token = this.authService.getToken() ;
+          this.tokenDecoded = this.helper.decodeToken(this.token);
+          if (this.tokenDecoded['Archivage'] == true) {
+            Swal.fire(
+              'Acces denied!',
+              'Sorry, your account has been blocked, please contact the Administrator for more information!',
+              'warning'
+            )
+            return;
+          }
+          // this.idUserConnected = tokenDecoded.id;
+         this.router.navigate(['/listUsers']) ;
       } , error => {
           console.log(error);
           this.fakeAuth = true ;

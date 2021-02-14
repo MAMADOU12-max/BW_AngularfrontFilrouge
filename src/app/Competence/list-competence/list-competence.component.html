@@ -14,20 +14,26 @@
 
       <div class="col-12" style="top: 62px;box-shadow: 10px 5px 5px gray; background-color: white">
           <div class="row">
-            <div class="col-lg-4 col-md-12 mt-md-4 col-sm-12 col-12   mt-4" style="border: black solid 2px">
-               <div class="mt-4 mb-4 border border-dark rounded-3">
-                   <select class="custom-select" [(ngModel)]="selectedOption" (ngModelChange)="optionChoised($event)">
-                         <option selected value="selectDefault">select a competence</option>
-                         <option  *ngFor="let competence of competences" value="{{competence.id}}"
-                                 >{{competence.nomCompetence}}</option>
-                   </select>
-               </div>
+             <div class="col-lg-4 col-md-12 mt-md-4 col-sm-12 col-12   mt-4" style="border: black solid 2px">
+                 <div class="mt-4 mb-4 border border-dark rounded-3">
+                     <select class="custom-select" [(ngModel)]="selectedOption" (ngModelChange)="optionChoised($event)">
+                           <option selected value="selectDefault">select a competence</option>
+                           <option  *ngFor="let competence of competences" value="{{competence.id}}"
+                                   >{{competence.nomCompetence}}</option>
+                     </select>
+                 </div>
                   <!--  libelle competence   -->
-                  <div class="scroller">
+                  <div class="scroller" style="">
                       {{libelle}}
                   </div>
               </div>
-              <div class="col-lg-8 col-md-12 mt-md-4 col-sm-12 col-12   mt-4">
+            <div class="col-lg-8 col-md-12 mt-md-4 col-sm-12 col-12   mt-4">
+                <div class="d-flex justify-content-end" >
+                    <a title="edit this crew capacity" (click)="editCompetence()" class="text-warning">
+                      <i class="fa fa-edit fa-2x"></i></a> &nbsp;
+                    <a title="delete this crew capacity" (click)="deleteCompetence()"
+                       class="text-danger"><i class="fa fa-trash fa-2x"> </i></a>
+                </div>
 
     <!--  ================================================NIVEAUX======================================== -->
 
@@ -40,11 +46,11 @@
                     <div class="card card-body">
                       <div class="d-flex flex-nowrap">
                         <div class="order-1 p-2 border border-dark border-2">
-                          <h3>Groupe d'actions à réaliser (N1)</h3>
+                          <h4>Groupe d'actions à réaliser (N1)</h4>
                              {{groupeDaction1}}
                         </div>
                         <div class="order-2 p-2 border border-dark border-2">
-                          <h3>Critères d'évaluation</h3>
+                          <h4>Critères d'évaluation</h4>
                               {{criteredEvaluation1}}
                         </div>
                       </div>
@@ -55,11 +61,11 @@
                     <div class="card card-body">
                       <div class="d-flex flex-nowrap">
                         <div class="order-1 p-2 border border-dark border-2">
-                          <h3>Groupe d'actions à réaliser (N2)</h3>
+                          <h4>Groupe d'actions à réaliser (N2)</h4>
                           {{groupeDaction2}}
                         </div>
                         <div class="order-2 p-2 border border-dark border-2">
-                          <h3>Critères d'évaluation</h3>
+                          <h4>Critères d'évaluation</h4>
                           {{criteredEvaluation2}}
                         </div>
                       </div>
@@ -70,11 +76,11 @@
                       <div class="card card-body">
                           <div class="d-flex flex-nowrap">
                               <div class="order-1 p-2 border border-dark border-2">
-                                 <h3>Groupe d'actions à réaliser (N3)</h3>
+                                 <h4>Groupe d'actions à réaliser (N3)</h4>
                                 {{groupeDaction3}}
                               </div>
                               <div class="order-2 p-2 border border-dark border-2">
-                                <h3>Critères d'évaluation</h3>
+                                <h4>Critères d'évaluation</h4>
                                 {{criteredEvaluation3}}
                               </div>
                           </div>

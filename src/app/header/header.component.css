@@ -128,3 +128,10 @@
 .dropdown-menu a:hover{
   background-color: #19B3D3; border-radius: 5px;
 }
+h4{
+  font-size: 15px;
+  font-weight: bolder;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 23px;
+}

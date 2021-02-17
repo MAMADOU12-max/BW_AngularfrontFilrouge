@@ -47,6 +47,9 @@ import {Ng2OrderModule} from "ng2-order-pipe";
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { SettingsComponent } from './settings/settings.component';
 import { ArchivingDataComponent } from './settings/archiving-data/archiving-data.component';
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import { DetailReferentielComponent } from './Referentiel/detail-referentiel/detail-referentiel.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +91,8 @@ import { ArchivingDataComponent } from './settings/archiving-data/archiving-data
     CutStringPipe,
     SettingsComponent,
     ArchivingDataComponent,
+    DetailReferentielComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,7 +103,8 @@ import { ArchivingDataComponent } from './settings/archiving-data/archiving-data
     NgxPaginationModule,
     QRCodeModule,
     Ng2OrderModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
     {

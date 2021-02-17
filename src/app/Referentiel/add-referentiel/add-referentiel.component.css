@@ -18,3 +18,9 @@
 textarea::placeholder {
   color: grey;
 }
+.error {
+  color: #FA8973;
+}
+textarea {
+  resize: none;
+}

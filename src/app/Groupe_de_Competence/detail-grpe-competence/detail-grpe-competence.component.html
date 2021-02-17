@@ -53,15 +53,15 @@
                                                       <table class="table table-striped">
                                                           <thead>
                                                           <tr>
+<!--                                                              <th scope="col">Niveaux</th>-->
                                                               <th scope="col">Niveaux</th>
-                                                              <th scope="col">libelle</th>
                                                               <th scope="col">critère d'évaluation</th>
                                                               <th scope="col">groupe d'action</th>
                                                           </tr>
                                                           </thead>
                                                           <tbody  *ngFor="let niveau of competence?.niveaux; let i = index" >
                                                             <tr>
-                                                                <th scope="row">Niveau {{i+1}}</th>
+<!--                                                                <th scope="row">Niveau {{i+1}}</th>-->
                                                                 <td>{{niveau?.level}}</td>
                                                                 <td>{{niveau?.groupedAction}}</td>
                                                                 <td>{{niveau?.criteredEvaluation}}</td>

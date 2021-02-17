@@ -29,6 +29,7 @@ import {DetailGrpeCompetenceComponent} from './Groupe_de_Competence/detail-grpe-
 import {AuthGuardServiceGuard} from "../Guards/auth-guard-service.guard";
 import {SettingsComponent} from "./settings/settings.component";
 import {EditCompetenceComponent} from "./Competence/edit-competence/edit-competence.component";
+import {DetailReferentielComponent} from "./Referentiel/detail-referentiel/detail-referentiel.component";
 
 const routes: Routes = [
     LoginRoute,
@@ -50,10 +51,11 @@ const routes: Routes = [
     {path: 'detailGrpeCompetence/:id', canActivate: [AuthGuardServiceGuard], component: DetailGrpeCompetenceComponent},
     {path: 'listCompetence', canActivate: [AuthGuardServiceGuard], component: ListCompetenceComponent},
     {path: 'addCompetence', canActivate: [AuthGuardServiceGuard], component: AddCompetenceComponent},
-    {path: 'editCompetence/:id',component: EditCompetenceComponent},
-    {path: 'listReferentiel', canActivate: [AuthGuardServiceGuard], component: ListReferentielComponent},
-    {path: 'addReferentiel', canActivate: [AuthGuardServiceGuard], component: AddReferentielComponent},
+    {path: 'editCompetence/:id',canActivate: [AuthGuardServiceGuard], component: EditCompetenceComponent},
+    {path: 'listReferentiel', component: ListReferentielComponent},
+    {path: 'addReferentiel',  component: AddReferentielComponent},
     {path: 'editReferentiel/:id', canActivate: [AuthGuardServiceGuard], component: EditReferentielComponent},
+    {path: 'detailReferentiel/:id', component: DetailReferentielComponent},
     {path: 'listPromotion', canActivate: [AuthGuardServiceGuard], component: ListPromotionComponent},
     {path: 'addPromotion', canActivate: [AuthGuardServiceGuard], component: AddPromotionComponent},
     {path: 'editPromotion', canActivate: [AuthGuardServiceGuard], component: EditPromotionComponent} ,

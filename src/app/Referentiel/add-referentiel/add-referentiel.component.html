@@ -3,64 +3,91 @@
 
 <div class="container signup-form offset-lg-2 offset-sm-1 offset-md-0 offset-0 ">
 
-  <h1>Création référentiel</h1>
-  <form>
-    <div class="form-group">
-      <label for="inputAddress" class="font-weight-bold text-white mt-3">Libellé</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="write a libelle">
-    </div>
-    <div class="form-group">
-      <label for="inputAddress" class="font-weight-bold text-white mt-3">Présentation</label>
-      <textarea class="form-control" rows="5" cols="33" placeholder="introduce your referentiel please ..."></textarea>
-    </div>
-    <div class="form-group col-6 justify-content-center offset-3">
-      <!--        <select name="" id="">-->
-      <!--            <option value="">Maitrise base de donnée </option>-->
-      <!--            <option value="">Angular & Java</option>-->
-      <!--        </select>-->
-      <label for="expertise" class="font-weight-bold text-white mt-3 col-sm-2 control-label">Competence</label>
-      <select class="form-control inputstl" id="expertise" multiple>
-        <option class="font-italic font-weight-bold">PHP</option>
-        <option class="font-italic font-weight-bold">Java</option>
-        <option class="font-italic font-weight-bold">HTML</option>
-        <option class="font-italic font-weight-bold">CSS</option>
-        <option class="font-italic font-weight-bold">Bootstrap</option>
-        <option class="font-italic font-weight-bold">SQL</option>
-      </select> <i class="fa fa-plus-square fa-2x"></i>
-    </div>
-    <div class="form-row justify-content-center">
-        <div class="form-group col-md-2 mt-4  ">
-            <label class="form-label text-white font-weight-bold mt-4">Programme</label>
+    <h1>Création référentiel</h1>
+    <form  (ngSubmit)="addingReferentiel()" [formGroup]="dataReferentielRecup">
+        <div class="form-group">
+            <label for="inputAddress" class="font-weight-bold text-white mt-3" >Libellé</label>
+            <input type="text" class="form-control" id="inputAddress" formControlName="libelle"  placeholder="write a libelle">
+            <span class="error" *ngIf="submitted || Validations.libelle.touched && Validations.libelle.errors">
+                 <span *ngIf="Validations.libelle.errors.required" >Libelle is required</span>
+                 <span *ngIf="Validations.libelle.errors.minlength">libelle is very short, At least 2 letters</span>
+            </span>
         </div>
-        <div class="form-group col-md-6">
-            <label for="" class="form-label text-white font-weight-bold">Uploader le programme</label>
-            <input type="file" class="form-control" id="inputPassword6" placeholder="password">
-            <span class="text-danger">********************</span>
+        <div class="form-group">
+            <label for="inputAddress" class="font-weight-bold text-white mt-3">Présentation</label>
+            <textarea class="form-control" rows="5" cols="33" formControlName="presentation" maxlength="255"
+                      placeholder="introduce your referentiel please ..."></textarea>
+            <span class="error" *ngIf="submitted || Validations.presentation.touched && Validations.presentation.errors">
+                  <span *ngIf="Validations.presentation.errors.required" >Presentation is required</span>
+            </span>
         </div>
-    </div>
-    <div class="form-group">
-      <label for="inputAddress" class="font-weight-bold text-white mt-3">Critères d'évaluation</label>
-      <textarea id="critere" name="story" rows="5" cols="33" class="form-control" id="evaluation" placeholder="give a critere"></textarea>
-    </div>
-    <div class="form-group">
-      <label for="inputAddress" class="font-weight-bold text-white mt-3">Critères d'admission</label>
-      <textarea id="" name="story" rows="5" cols="33" class="form-control" id="admission" placeholder="give some admission limit"></textarea>
-    </div>
-    <div class="form-group">
-      <!--      <input type="text">-->
-    </div>
-    <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck">
-        <label class="form-check-label text-white" for="gridCheck">
-          Check me out
-        </label>
-      </div>
-    </div>
-    <button type="submit" class="mt-3 font-weight-bold rounded h4 btn-outline-dark" routerLink="/listGrpeCompetence"
-            style="margin-bottom: 12px">Soumettre</button>
-  </form>
+        <div class="form-group col-6 justify-content-center offset-3">
+            <label for="" class="font-weight-bold text-white mt-3 control-label">Groupes Competences</label>
+<!--            <select class="form-control inputstl" id="expertise" multiple [(ngModel)]="groupeCompetence"-->
+<!--                    >-->
+<!--                <option class="font-italic font-weight-bold" *ngFor="let grpCmptence of AllgrpeCompetences" (change)="groupeCompetenceChoised($event)"-->
+<!--                        value="{{grpCmptence.id}}" >{{grpCmptence.libelle}}</option>-->
+<!--           </select>-->
+            <ng-multiselect-dropdown
+              formControlName="groupeCompetencesSelected"
+              [placeholder]="'Select groupe competence please'"
+              [data]="AllgrpeCompetences"
+              [(ngModel)]="selectedItems"
+              [settings]="dropdownSettings"
+              (onSelect)="onItemSelect($event)"
+              (onSelectAll)="onSelectAll($event)"
+            >
+            </ng-multiselect-dropdown>
+            <span class="error" *ngIf="submitted || Validations.groupeCompetencesSelected.touched && Validations.groupeCompetencesSelected.errors">
+                  <span *ngIf="Validations.groupeCompetencesSelected.errors.required" >Choose groupeCompetence please</span>
+            </span>
+          <br>
+        </div>
+        <div class="form-row justify-content-center">
+            <div class="form-group col-md-2 mt-4 ">
+                <label class="form-label text-white font-weight-bold mt-4">Program</label>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="" class="form-label text-white font-weight-bold">Upload program</label>
+                <input type="file" class="form-control" accept="application/pdf" formControlName="programme" (change)="uploadFile($event)"/>
+                <span class="error" *ngIf="submitted || Validations.programme.touched && Validations.programme.errors">
+                    <span *ngIf="Validations.programme.errors.required" >You must upload a program</span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress" class="font-weight-bold text-white mt-3">Critères d'évaluation</label>
+            <textarea id="critere" name="story" rows="5" cols="33" formControlName="critereDevaluation" class="form-control" id="evaluation"
+                      placeholder="give a critere" maxlength="255"></textarea>
+            <span class="error" *ngIf="submitted || Validations.critereDevaluation.touched && Validations.critereDevaluation.errors">
+                  <span *ngIf="Validations.critereDevaluation.errors.required" >Evaluation standard is required</span>
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress" class="font-weight-bold text-white mt-3">Critères d'admission</label>
+            <textarea id="" name="story" rows="5" cols="33" class="form-control" formControlName="critereDadmission" id="admission"
+                      placeholder="give some admission limit" maxlength="255"></textarea>
+            <span class="error" *ngIf="submitted || Validations.critereDadmission.touched && Validations.critereDadmission.errors">
+                 <span *ngIf="Validations.critereDadmission.errors.required" >Admission standard is required</span>
+            </span>
+        </div>
+        <br>
+        <div class="form-group">
+          <!--      <input type="text">-->
+        </div>
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label text-white" for="gridCheck">
+                  Check me out
+                </label>
+            </div>
+        </div>
+        <button type="submit" class="mt-3 font-weight-bold rounded h4 btn-outline-dark"
+                style="margin-bottom: 12px">Soumettre</button>
+    </form>
 </div>
 
+<!--window.location.back() => for return always last page -->
 
 

@@ -76,6 +76,7 @@ export class AddReferentielComponent implements OnInit {
 
 
   addingReferentiel() {
+      // id:number = null;
       this.submitted = true;
       if (this.dataReferentielRecup.invalid) {
           console.log("ERROR!");
@@ -92,8 +93,8 @@ export class AddReferentielComponent implements OnInit {
           }
       }
 
-      for (const groupeCompetence of this.selectedItems) {
-        this.groupeCompetencesSelected += groupeCompetence?.id + ',';
+      for (const groupeCompetence of formValue.this.selectedItems) {
+        this.groupeCompetencesSelected += groupeCompetence.id + ',';
         // console.log(this.groupeCompetencesSelected);
       }
       // groupe Competence

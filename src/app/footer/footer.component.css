@@ -1,0 +1,14 @@
+
+#mainFooter{
+  height: 35px;
+  color: var(--white);
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+
+}
